@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { prop } from 'ramda';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'iris';
+  constructor() {
+    console.log(prop('x', { x: 100 }));
+  }
 }
