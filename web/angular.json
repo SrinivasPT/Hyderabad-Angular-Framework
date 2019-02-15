@@ -130,6 +130,41 @@
           }
         }
       }
+    },
+    "hyderabad": {
+      "root": "projects/hyderabad",
+      "sourceRoot": "projects/hyderabad/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/hyderabad/tsconfig.lib.json",
+            "project": "projects/hyderabad/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/hyderabad/src/test.ts",
+            "tsConfig": "projects/hyderabad/tsconfig.spec.json",
+            "karmaConfig": "projects/hyderabad/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/hyderabad/tsconfig.lib.json",
+              "projects/hyderabad/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "iris"
