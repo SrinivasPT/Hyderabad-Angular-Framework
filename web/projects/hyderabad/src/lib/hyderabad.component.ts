@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'lib-hyderabad',
   template: `
-    <p>
-      hyderabad works!
-    </p>
+    <p>      Srinivas hyderabad works!    </p>
   `,
   styles: []
 })
