@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-hyderabad',
-  template: `<p>Srinivas hyderabad works!</p>`,
+  selector: 'hyd-hyderabad',
+  template: `
+    <p>Srinivas hyderabad works!</p>
+  `,
   styles: []
 })
 export class HyderabadComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

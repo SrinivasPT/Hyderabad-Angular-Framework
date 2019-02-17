@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HyderabadModule } from 'hyderabad';
+import { environment } from 'src/environments/environment.prod';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, HyderabadModule],
-  exports: [HyderabadModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, HyderabadModule.forRoot(environment)],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })

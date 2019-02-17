@@ -1,0 +1,14 @@
+/home/juno/Documents/iris/service/bin/Debug/netcoreapp2.2/service.deps.json
+/home/juno/Documents/iris/service/bin/Debug/netcoreapp2.2/service.runtimeconfig.json
+/home/juno/Documents/iris/service/bin/Debug/netcoreapp2.2/service.runtimeconfig.dev.json
+/home/juno/Documents/iris/service/bin/Debug/netcoreapp2.2/service.dll
+/home/juno/Documents/iris/service/bin/Debug/netcoreapp2.2/service.pdb
+/home/juno/Documents/iris/service/obj/Debug/netcoreapp2.2/service.csprojAssemblyReference.cache
+/home/juno/Documents/iris/service/obj/Debug/netcoreapp2.2/service.csproj.CoreCompileInputs.cache
+/home/juno/Documents/iris/service/obj/Debug/netcoreapp2.2/service.RazorAssemblyInfo.cache
+/home/juno/Documents/iris/service/obj/Debug/netcoreapp2.2/service.RazorAssemblyInfo.cs
+/home/juno/Documents/iris/service/obj/Debug/netcoreapp2.2/service.AssemblyInfoInputs.cache
+/home/juno/Documents/iris/service/obj/Debug/netcoreapp2.2/service.AssemblyInfo.cs
+/home/juno/Documents/iris/service/obj/Debug/netcoreapp2.2/service.RazorTargetAssemblyInfo.cache
+/home/juno/Documents/iris/service/obj/Debug/netcoreapp2.2/service.dll
+/home/juno/Documents/iris/service/obj/Debug/netcoreapp2.2/service.pdb
