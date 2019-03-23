@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
@@ -17,9 +16,8 @@ import { RippleModule } from '@progress/kendo-angular-ripple';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    // CommonModule,
     ButtonsModule,
-    BrowserAnimationsModule,
     DialogsModule,
     DropDownsModule,
     ExcelExportModule,
@@ -32,9 +30,8 @@ import { RippleModule } from '@progress/kendo-angular-ripple';
     RippleModule
   ],
   exports: [
-    CommonModule,
+    // CommonModule,
     ButtonsModule,
-    BrowserAnimationsModule,
     DialogsModule,
     DropDownsModule,
     ExcelExportModule,

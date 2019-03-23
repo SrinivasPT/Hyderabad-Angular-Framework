@@ -16,7 +16,7 @@ const appRoutes: Routes = [
     loadChildren: './sample/sample.module#SampleModule',
     data: { preload: true }
   },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/sample', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

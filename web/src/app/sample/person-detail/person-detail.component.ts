@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-person-detail',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./person-detail.component.css']
 })
 export class PersonDetailComponent implements OnInit {
+  form: FormGroup;
+  modal = { firstName: 'Srinivas' };
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({ ...this.modal });
   }
 
 }

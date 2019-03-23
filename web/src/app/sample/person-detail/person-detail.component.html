@@ -1,3 +1,6 @@
-<p>
-  person-detail works!
-</p>
+<form [formGroup]="form">
+  <p> Person Detail Works!</p>
+  <hyd-textbox [group]="form" [label]="'First Name'" [frmControlName] = "'firstName'"></hyd-textbox>
+</form>
+
+<div>{{form.value | json}}</div>

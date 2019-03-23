@@ -6,7 +6,7 @@ import { PersonDetailComponent } from './person-detail/person-detail.component';
 const crisisCenterRoutes: Routes = [
   {
     path: '',
-    component: PersonListComponent,
+    component: PersonDetailComponent,
     children: [
       {
         path: ':id',

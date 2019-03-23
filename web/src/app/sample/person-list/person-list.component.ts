@@ -10,7 +10,7 @@ export class PersonListComponent implements OnInit {
   constructor(private personService: PersonService) {}
 
   ngOnInit() {
-    this.personService.getHeroes().subscribe(data => {
+    this.personService.search().subscribe(data => {
       console.log(data);
     });
   }
