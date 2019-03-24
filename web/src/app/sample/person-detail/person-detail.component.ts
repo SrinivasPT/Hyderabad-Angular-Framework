@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class PersonDetailComponent implements OnInit {
   form: FormGroup;
-  modal = { firstName: 'Srinivas' };
+  modal = { firstName: 'Srinivas', lastName: 'Peeta', country:'India', joinDate: new Date('1/1/2019') };
 
   constructor(private fb: FormBuilder) { }
 

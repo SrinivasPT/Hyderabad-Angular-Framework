@@ -1,6 +1,12 @@
-<form [formGroup]="form">
+<form [formGroup]="form" class="k-form">
   <p> Person Detail Works!</p>
-  <hyd-textbox [group]="form" [label]="'First Name'" [frmControlName] = "'firstName'"></hyd-textbox>
-</form>
+  <div class = "d-flex flex-wrap">
+    <hyd-textbox class="col-md-3" [group]="form" [label]="'First Name'" [frmControlName] = "'firstName'"></hyd-textbox>
+    <hyd-textbox class="col-md-3" [group]="form" [frmControlName] = "'lastName'"></hyd-textbox>
+    <hyd-textbox class="col-md-3" [group]="form" [frmControlName] = "'country'"></hyd-textbox>
+    <hyd-datepicker class="col-md-3" [group]="form" [frmControlName] = "'joinDate'"></hyd-datepicker>
+    <hyd-textarea class="col-md-3" [group]="form" [label]="'Country'" [frmControlName] = "'country'"></hyd-textarea>
+  </div>
+</form> 
 
 <div>{{form.value | json}}</div>

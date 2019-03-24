@@ -12,6 +12,7 @@ import { LabelModule } from '@progress/kendo-angular-label';
 import { MenuModule } from '@progress/kendo-angular-menu';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { RippleModule } from '@progress/kendo-angular-ripple';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,8 @@ import { RippleModule } from '@progress/kendo-angular-ripple';
     LabelModule,
     MenuModule,
     NotificationModule,
-    RippleModule
+    RippleModule,
+    DateInputsModule
   ],
   exports: [
     // CommonModule,
@@ -41,7 +43,8 @@ import { RippleModule } from '@progress/kendo-angular-ripple';
     LabelModule,
     MenuModule,
     NotificationModule,
-    RippleModule
+    RippleModule,
+    DateInputsModule
   ]
 })
 export class KendoControlsModule {}
