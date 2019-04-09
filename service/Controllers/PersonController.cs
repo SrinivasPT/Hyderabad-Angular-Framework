@@ -24,9 +24,16 @@ namespace service.Controllers
 
         // GET api/Person/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public dynamic Get(int id)
         {
-            return "value";
+            var node = new {
+                id = id,
+                firstName = "Srinivas",
+                lastName = "Peeta",
+                country =  "India",
+                joinDate = ""
+            };
+            return node;
         }
 
         // POST api/Person

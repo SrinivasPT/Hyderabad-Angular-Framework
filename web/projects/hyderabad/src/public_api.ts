@@ -24,3 +24,8 @@ export * from './lib/components/page-not-found/page-not-found.component';
  * Modules
  */
 export * from './lib/hyderabad.module';
+
+/**
+ * Directives
+ */
+export * from './lib/pipes/pretty-print.pipe';

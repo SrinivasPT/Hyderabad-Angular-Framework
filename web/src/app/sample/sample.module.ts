@@ -8,5 +8,5 @@ import { HyderabadModule } from 'hyderabad';
 @NgModule({
   declarations: [PersonListComponent, PersonDetailComponent],
   imports: [CommonModule, SampleRoutingModule, HyderabadModule]
-})
+}) 
 export class SampleModule {}

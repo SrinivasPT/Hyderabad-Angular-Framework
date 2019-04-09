@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CacheService } from 'projects/hyderabad/src/lib/services/cache.service';
+import { Person } from '../../data-model';
+import { PersonService } from '../person.service';
 
 @Component({
   selector: 'app-person-detail',
@@ -8,12 +11,27 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class PersonDetailComponent implements OnInit {
   form: FormGroup;
-  modal = { firstName: 'Srinivas', lastName: 'Peeta', country:'India', joinDate: new Date('1/1/2019') };
+  modal = {};
+  id = '80';
 
-  constructor(private fb: FormBuilder) { }
+  showDebugInfo = false;
+
+  constructor(private fb: FormBuilder, private personService: PersonService, private cahceService: CacheService) {}
 
   ngOnInit() {
-    this.form = this.fb.group({ ...this.modal });
+    this.form = this.fb.group({ ...new Person() });
+    this.loadData(this.id);
   }
 
+  loadData(id: string) {
+    this.personService.get(id).subscribe(data => {
+      this.modal = data;
+      this.form.patchValue(data);
+      console.log(data);
+    });
+  }
+
+  clearCache() {
+    this.cahceService.clear();
+  }
 }

@@ -1,33 +1,42 @@
 {
-"editor.fontFamily": "Consolas",
-"editor.codeLens": false,
-"editor.renderWhitespace": "none",
-"editor.autoIndent": true,
-"editor.fontSize": 14,
-"editor.formatOnPaste": false,
-"editor.formatOnType": true,
-"editor.tabSize": 2,
-"editor.wordWrap": "off",
-
-"html.format.enable": true,
-
-"files.autoSave": "afterDelay",
-"files.autoSaveDelay": 2000,
-"files.exclude": {
-  "**/.git": true,
-  "**/.DS_Store": true,
-  "**/*.js": {
-    "when": "$(basename).ts"
+  "editor.autoIndent": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
   },
-  "**/*.js.map": {
-    "when": "$(basename)"
-  }
-},
-"files.hotExit": "onExit",
-"files.defaultLanguage": "typescript",
-"files.trimTrailingWhitespace": true,
+  "editor.codeLens": false,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorStyle": "line",
+  "editor.fontSize": 13.5,
+  "editor.fontFamily": "Consolas, Dank Mono, Operator Mono, Fira Code, Inconsolata, Menlo",
+  "editor.fontLigatures": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "none",
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "off",
 
-"prettier.singleQuote": true,
-"prettier.printWidth": 100,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*.js.map": {
+      "when": "$(basename)"
+    }
+  },
+  "files.hotExit": "onExit",
+  "files.defaultLanguage": "typescript",
+  "files.trimTrailingWhitespace": true,
 
+  "prettier.singleQuote": true,
+  "prettier.printWidth": 140,
+
+  "peacock.affectActivityBar": true,
+  "peacock.affectStatusBar": true,
+  "peacock.affectTitleBar": false
 }

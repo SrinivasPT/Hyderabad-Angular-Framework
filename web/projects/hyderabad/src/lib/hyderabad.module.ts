@@ -7,11 +7,27 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MessagesComponent } from './components/messages/messages.component';
 import { HyderabadControlsModule } from './components/custom-controls/hyderabad-controls.module';
 import { CommonModule } from '@angular/common';
+import { PrettyPrintPipe } from './pipes/pretty-print.pipe';
 
 @NgModule({
-  declarations: [HyderabadComponent, HeaderBarComponent, FooterBarComponent, PageNotFoundComponent, MessagesComponent],
+  declarations: [
+    HyderabadComponent,
+    HeaderBarComponent,
+    FooterBarComponent,
+    PageNotFoundComponent,
+    MessagesComponent,
+    PrettyPrintPipe
+  ],
   imports: [CommonModule, KendoControlsModule],
-  exports: [KendoControlsModule, HyderabadControlsModule, HyderabadComponent, HeaderBarComponent, FooterBarComponent, PageNotFoundComponent]
+  exports: [
+    KendoControlsModule,
+    HyderabadControlsModule,
+    HyderabadComponent,
+    HeaderBarComponent,
+    FooterBarComponent,
+    PageNotFoundComponent,
+    PrettyPrintPipe
+  ]
 })
 export class HyderabadModule {
   public static forRoot(environment: any): ModuleWithProviders {
