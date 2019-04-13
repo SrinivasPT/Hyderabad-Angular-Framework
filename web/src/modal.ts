@@ -1,5 +1,5 @@
 // tslint:disable-next-line: no-namespace
-namespace modal {
+namespace hyderabad {
   export class Person {
     ID: string = undefined;
     Name: string = undefined;
@@ -7,5 +7,9 @@ namespace modal {
 
   export class PersonList {
     Person: Person[] = [];
+  }
+
+  export class IEntity {
+    id: number;
   }
 }

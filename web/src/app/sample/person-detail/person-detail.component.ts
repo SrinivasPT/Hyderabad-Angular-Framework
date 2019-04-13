@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CacheService } from 'projects/hyderabad/src/lib/services/cache.service';
+import { CacheService, NGXLogger } from 'hyderabad';
 import { Person } from '../../data-model';
 import { PersonService } from '../person.service';
 
@@ -16,7 +16,16 @@ export class PersonDetailComponent implements OnInit {
 
   showDebugInfo = false;
 
-  constructor(private fb: FormBuilder, private personService: PersonService, private cahceService: CacheService) {}
+  constructor(
+    private fb: FormBuilder,
+    private personService: PersonService,
+    private cahceService: CacheService,
+    private logger: NGXLogger
+  ) {
+    this.logger.debug('Your log message goes here');
+    this.logger.error('Your log message goes here');
+    this.logger.debug('Multiple', 'Argument', 'support');
+  }
 
   ngOnInit() {
     this.form = this.fb.group({ ...new Person() });

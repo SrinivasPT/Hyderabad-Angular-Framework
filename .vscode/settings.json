@@ -29,6 +29,11 @@
       "when": "$(basename)"
     }
   },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true
+  },
   "files.hotExit": "onExit",
   "files.defaultLanguage": "typescript",
   "files.trimTrailingWhitespace": true,
@@ -38,5 +43,6 @@
 
   "peacock.affectActivityBar": true,
   "peacock.affectStatusBar": true,
-  "peacock.affectTitleBar": false
+  "peacock.affectTitleBar": false,
+  "workbench.colorTheme": "Winter is Coming (Dark)"
 }
