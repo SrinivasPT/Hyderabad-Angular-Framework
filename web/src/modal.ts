@@ -8,8 +8,4 @@ namespace hyderabad {
   export class PersonList {
     Person: Person[] = [];
   }
-
-  export class IEntity {
-    id: number;
-  }
 }
