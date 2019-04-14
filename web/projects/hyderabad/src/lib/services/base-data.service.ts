@@ -6,18 +6,7 @@ import { DatabaseService } from './database.service';
 
 @Injectable()
 export abstract class BaseDataService<T> {
-  // controllerName: string;
-  // protected http: HttpClient;
-  // protected cacheService: CacheService;
-  // protected databaseService: DatabaseService<T>;
-
   constructor(protected http: HttpClient, protected cacheService: CacheService, protected databaseService: DatabaseService<T>) {
-    // constructor() {
-    // const injector = AppInjector.getInjector();
-    // this.http = injector.get(HttpClient);
-    // this.cacheService = injector.get(CacheService);
-    // this.databaseService = injector.get<DatabaseService<T>>(DatabaseService);
-    // this.controllerName = this.getControllerName();
     console.log(this.constructor.name);
   }
 
@@ -38,11 +27,6 @@ export abstract class BaseDataService<T> {
   delete(): boolean {
     return true;
   }
-
-  // private getURL(action: string = ''): string {
-  //   const baseURL = 'https://localhost:5001/api';
-  //   return `${baseURL}/${this.controllerName}/${action}`;
-  // }
 
   controllerName = (): string => this.constructor.name.replace('Service', '');
 

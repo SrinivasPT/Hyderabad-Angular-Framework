@@ -40,17 +40,17 @@ export class UserIdleService {
    * Idle value in seconds.
    * Default equals to 10 minutes.
    */
-  protected idle = 600;
+  protected idle = 60;
   /**
    * Timeout value in seconds.
    * Default equals to 5 minutes.
    */
-  protected timeout = 300;
+  protected timeout = 30;
   /**
    * Ping value in seconds.
    * * Default equals to 2 minutes.
    */
-  protected ping = 120;
+  protected ping = 12;
   /**
    * Timeout status.
    */
@@ -86,7 +86,7 @@ export class UserIdleService {
     // If any of user events is not active for idle-seconds when start timer.
     this.idleSubscription = this.idle$
       .pipe(
-        bufferTime(500), // Starting point of detecting of user's inactivity
+        bufferTime(20), // 500 Starting point of detecting of user's inactivity
         filter(arr => !arr.length && !this.isIdleDetected && !this.isInactivityTimer),
         tap(() => (this.isIdleDetected = true)),
         switchMap(() =>

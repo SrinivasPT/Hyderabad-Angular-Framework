@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IEntity } from 'hyderabad';
 import { AppInjector } from './app-injector.service';
 import { BaseComponent } from './base.component';
 
@@ -10,8 +11,8 @@ export class BaseFormComponent extends BaseComponent implements OnInit {
   updatePermission = 'UPDATE_FULL'; // Can override in child component
 
   protected routeParamName: string; // value always set in child
-  protected entity: hyderabad.IEntity; // data on the form
-  protected original: hyderabad.IEntity; // data before any changes are made
+  protected entity: IEntity; // data on the form
+  protected original: IEntity; // data before any changes are made
   // protected dataService: EntityDataService; // service with http methods
   // protected updateService: UpdateService;
   // protected authorizationService: AuthorizationService;
