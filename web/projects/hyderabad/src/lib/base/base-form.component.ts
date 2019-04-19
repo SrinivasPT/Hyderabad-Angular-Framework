@@ -1,44 +1,56 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IEntity } from 'hyderabad';
-import { AppInjector } from './app-injector.service';
+import { BaseDataService } from '../services/base-data.service';
+import { SessionService } from '../services/session.service';
 import { BaseComponent } from './base.component';
 
 @Component({
   template: ''
 })
-export class BaseFormComponent extends BaseComponent implements OnInit {
+export abstract class BaseFormComponent<T> extends BaseComponent<T> implements OnInit {
+  form: FormGroup;
+  id: string;
   updatePermission = 'UPDATE_FULL'; // Can override in child component
 
   protected routeParamName: string; // value always set in child
-  protected entity: IEntity; // data on the form
-  protected original: IEntity; // data before any changes are made
-  // protected dataService: EntityDataService; // service with http methods
-  // protected updateService: UpdateService;
-  // protected authorizationService: AuthorizationService;
+  protected entity = {} as T; // data on the form
+  protected original = {} as T; // data before any changes are made
+  protected formData = {} as T;
 
-  // @ViewChild('confirmationDialog') confirmationDialog: ConfirmDialogComponent;
+  fb = this.sessionService.fb;
 
-  constructor(protected route: ActivatedRoute) {
-    super(); // call parent constructor
-    const injector = AppInjector.getInjector();
-    // this.updateService = injector.get(UpdateService);
-    // this.authorizationService = injector.get(AuthorizationService);
+  constructor(
+    protected sessionService: SessionService,
+    protected baseService: BaseDataService<T>,
+    protected activatedRoute: ActivatedRoute
+  ) {
+    super(sessionService, baseService);
+    this.formData = this.setEntityInstance();
   }
 
+  abstract setEntityInstance(): T;
+
   ngOnInit() {
-    this.route.data.subscribe(data => {
-      // data from route resolver
+    this.form = this.fb.group({ ...this.formData });
+    this.loadData(this.id);
+    this.activatedRoute.data.subscribe(data => {
       this.entity = data[this.routeParamName]; // routeParamName from child
       this.additionalFormInitialize(); // optional initialization in child
+    });
+  }
+
+  loadData(id: string) {
+    this.baseService.get(id).subscribe(data => {
+      this.formData = data;
+      this.form.patchValue(data);
+      console.log(data);
     });
   }
 
   protected additionalFormInitialize() {
     // hook for child
   }
-
-  // Child could override this method for alternate implementation
 
   hasChanged() {
     return JSON.stringify(this.original) === JSON.stringify(this.entity) ? true : false;

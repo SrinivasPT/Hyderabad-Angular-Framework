@@ -2,26 +2,16 @@
   <p>Person Detail Works!</p>
   <div class="d-flex flex-wrap">
     <hyd-textbox class="col-md-3" [group]="form" [frmControlName]="'id'"></hyd-textbox>
-    <hyd-textbox
-      class="col-md-3"
-      [group]="form"
-      [label]="'First Name'"
-      [frmControlName]="'firstName'"
-    ></hyd-textbox>
+    <hyd-textbox class="col-md-3" [group]="form" [label]="'First Name'" [frmControlName]="'firstName'"></hyd-textbox>
     <hyd-textbox class="col-md-3" [group]="form" [frmControlName]="'lastName'"></hyd-textbox>
     <hyd-textbox class="col-md-3" [group]="form" [frmControlName]="'country'"></hyd-textbox>
     <hyd-datepicker class="col-md-3" [group]="form" [frmControlName]="'joinDate'"></hyd-datepicker>
-    <hyd-textarea
-      class="col-md-3"
-      [group]="form"
-      [label]="'Country'"
-      [frmControlName]="'country'"
-    ></hyd-textarea>
+    <hyd-textarea class="col-md-3" [group]="form" [label]="'Country'" [frmControlName]="'country'"></hyd-textarea>
   </div>
-  <button (click)="loadData(98)">98-Rec</button>
-  <button (click)="loadData(99)">99</button>
-  <button (click)="loadData(100)">100</button>
-  <button (click)="loadData(101)">101</button>
+  <button (click)="loadDataOne(98)">98-Rec</button>
+  <button (click)="loadDataOne(99)">99</button>
+  <button (click)="loadDataOne(100)">100</button>
+  <button (click)="loadDataOne(101)">101</button>
   <button (click)="clearCache()">Clear Cache</button>
 </form>
 

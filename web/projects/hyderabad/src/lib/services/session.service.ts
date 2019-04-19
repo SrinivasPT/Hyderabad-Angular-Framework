@@ -1,21 +1,22 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Auth } from '../data-model';
-import { BaseDataService } from './base-data.service';
+import { NGXLogger } from '../logger/logger.service';
 import { CacheService } from './cache.service';
 import { DatabaseService } from './database.service';
 import { UserIdleService } from './idle.service';
 
 @Injectable()
-export class SessionService extends BaseDataService<any> {
+export class SessionService {
   auth: Auth = new Auth();
   constructor(
-    protected http: HttpClient,
-    protected cacheService: CacheService,
-    protected idleService: UserIdleService,
-    protected databaseService: DatabaseService<hyderabad.Person>
+    public cacheService: CacheService,
+    public idleService: UserIdleService,
+    public logger: NGXLogger,
+    public databaseService: DatabaseService<any>,
+    public fb: FormBuilder
   ) {
-    super(http, cacheService, databaseService);
+    // super(cacheService, databaseService);
   }
 
   /**
@@ -23,7 +24,7 @@ export class SessionService extends BaseDataService<any> {
    * To achieve this promises are used.
    */
   login(): Promise<any> {
-    let retVal = new Promise((resolve, reject) => {
+    const retVal = new Promise((resolve, reject) => {
       this.databaseService.post('security', 'login', { LanId: '43232' }).subscribe(data => {
         this.auth = data;
         // tslint:disable-next-line: no-string-literal

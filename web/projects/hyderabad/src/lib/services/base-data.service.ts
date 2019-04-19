@@ -1,17 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { EMPTY, of } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import { CacheService } from './cache.service';
-import { DatabaseService } from './database.service';
+import { mergeMap, take } from 'rxjs/operators';
+import { SessionService } from './session.service';
 
 @Injectable()
-export abstract class BaseDataService<T> {
-  constructor(protected http: HttpClient, protected cacheService: CacheService, protected databaseService: DatabaseService<T>) {
-    console.log(this.constructor.name);
-  }
+export abstract class BaseDataService<T> implements Resolve<T> {
+  constructor(protected sessionService: SessionService) {}
+
+  cacheService = this.sessionService.cacheService;
+  databaseService = this.sessionService.databaseService;
 
   get(id: string): Observable<T> {
-    // return this.cacheService.get(this.getCacheKey(id), this.http.get<T>(`${this.getURL('')}${id}`));
     return this.cacheService.get(this.getCacheKey(id), this.databaseService.get(this.controllerName(), id));
   }
 
@@ -31,4 +32,15 @@ export abstract class BaseDataService<T> {
   controllerName = (): string => this.constructor.name.replace('Service', '');
 
   getCacheKey = (id: string, action: string = '') => `RecordID=${id}::${this.controllerName()}::${action}`;
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<T> | Observable<never> {
+    const id = route.paramMap.get('id');
+
+    return this.get(id).pipe(
+      take(1),
+      mergeMap(data => {
+        return data ? of(data) : EMPTY;
+      })
+    );
+  }
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PersonListComponent } from './person-list/person-list.component';
 import { PersonDetailComponent } from './person-detail/person-detail.component';
+import { PersonService } from './person.service';
 
 const crisisCenterRoutes: Routes = [
   {
@@ -10,10 +10,11 @@ const crisisCenterRoutes: Routes = [
     children: [
       {
         path: ':id',
-        component: PersonDetailComponent
+        component: PersonDetailComponent,
         // canDeactivate: [CanDeactivateGuard],
-        // resolve: {
-        //   crisis: SampleDetailResolverService
+        resolve: {
+          crisis: PersonService
+        }
       }
     ]
   }

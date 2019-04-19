@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { CacheService, NGXLogger } from 'hyderabad';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BaseFormComponent, SessionService } from 'hyderabad';
 import { Person } from '../../data-model';
 import { PersonService } from '../person.service';
 
@@ -9,38 +9,36 @@ import { PersonService } from '../person.service';
   templateUrl: './person-detail.component.html',
   styleUrls: ['./person-detail.component.css']
 })
-export class PersonDetailComponent implements OnInit {
-  form: FormGroup;
+export class PersonDetailComponent extends BaseFormComponent<Person> {
+  // form: FormGroup;
   modal = {};
   id = '80';
 
   showDebugInfo = false;
 
   constructor(
-    private fb: FormBuilder,
-    private personService: PersonService,
-    private cahceService: CacheService,
-    private logger: NGXLogger
+    protected sessionSerive: SessionService,
+    protected personService: PersonService,
+    protected activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
-    this.logger.debug('Your log message goes here');
-    this.logger.error('Your log message goes here');
-    this.logger.debug('Multiple', 'Argument', 'support');
+    super(sessionSerive, personService, activatedRoute);
   }
 
-  ngOnInit() {
-    this.form = this.fb.group({ ...new Person() });
-    this.loadData(this.id);
+  setEntityInstance(): Person {
+    return new Person();
   }
 
-  loadData(id: string) {
-    this.personService.get(id).subscribe(data => {
-      this.modal = data;
-      this.form.patchValue(data);
-      console.log(data);
-    });
+  loadDataOne(id: string) {
+    this.router.navigate(['./', id], { relativeTo: this.activatedRoute });
+    this.loadData(id);
   }
 
-  clearCache() {
-    this.cahceService.clear();
-  }
+  // loadData(id: string) {
+  //   this.personService.get(id).subscribe(data => {
+  //     this.modal = data;
+  //     this.form.patchValue(data);
+  //     console.log(data);
+  //   });
+  // }
 }

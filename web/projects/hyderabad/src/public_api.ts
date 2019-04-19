@@ -2,6 +2,8 @@
  * Public API Surface of hyderabad
  */
 
+export * from './lib/base/base-form.component';
+export * from './lib/base/base.component';
 export * from './lib/components/page-not-found/page-not-found.component';
 export * from './lib/components/page/footer-bar/footer-bar.component';
 export * from './lib/components/page/header-bar/header-bar.component';
