@@ -33,9 +33,10 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
 
   ngOnInit() {
     this.form = this.fb.group({ ...this.formData });
-    this.loadData(this.id);
+
     this.activatedRoute.data.subscribe(data => {
       this.entity = data[this.routeParamName]; // routeParamName from child
+      this.loadData(this.id);
       this.additionalFormInitialize(); // optional initialization in child
     });
   }

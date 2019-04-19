@@ -11,6 +11,7 @@ const crisisCenterRoutes: Routes = [
       {
         path: ':id',
         component: PersonDetailComponent,
+        runGuardsAndResolvers: 'always',
         // canDeactivate: [CanDeactivateGuard],
         resolve: {
           crisis: PersonService

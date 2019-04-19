@@ -12,7 +12,7 @@ import { PersonService } from '../person.service';
 export class PersonDetailComponent extends BaseFormComponent<Person> {
   // form: FormGroup;
   modal = {};
-  id = '80';
+  // id = '80';
 
   showDebugInfo = false;
 
@@ -31,7 +31,7 @@ export class PersonDetailComponent extends BaseFormComponent<Person> {
 
   loadDataOne(id: string) {
     this.router.navigate(['./', id], { relativeTo: this.activatedRoute });
-    this.loadData(id);
+    // this.loadData(id);
   }
 
   // loadData(id: string) {
