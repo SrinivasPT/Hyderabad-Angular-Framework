@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CanDeactivateGuard } from 'hyderabad';
 import { PersonDetailComponent } from './person-detail/person-detail.component';
 import { PersonService } from './person.service';
 
 const crisisCenterRoutes: Routes = [
   {
     path: '',
+    component: PersonDetailComponent
+  },
+  {
+    path: ':id',
     component: PersonDetailComponent,
-    children: [
-      {
-        path: ':id',
-        component: PersonDetailComponent,
-        runGuardsAndResolvers: 'always',
-        // canDeactivate: [CanDeactivateGuard],
-        resolve: {
-          crisis: PersonService
-        }
-      }
-    ]
+    runGuardsAndResolvers: 'always',
+    canDeactivate: [CanDeactivateGuard],
+    resolve: {
+      pageData: PersonService
+    }
   }
 ];
 
@@ -25,7 +24,7 @@ const crisisCenterRoutes: Routes = [
   imports: [RouterModule.forChild(crisisCenterRoutes)],
   exports: [RouterModule]
 })
-export class SampleRoutingModule {}
+export class PersonRoutingModule {}
 
 /*
 Copyright Google LLC. All Rights Reserved.

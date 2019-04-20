@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { HyderabadModule } from 'hyderabad';
 import { PersonDetailComponent } from './person-detail/person-detail.component';
 import { PersonListComponent } from './person-list/person-list.component';
+import { PersonRoutingModule } from './person-routing.module';
 import { PersonService } from './person.service';
-import { SampleRoutingModule } from './sample-routing.module';
 
 @NgModule({
   declarations: [PersonListComponent, PersonDetailComponent],
-  imports: [CommonModule, SampleRoutingModule, HyderabadModule],
+  imports: [CommonModule, PersonRoutingModule, HyderabadModule],
   providers: [PersonService]
 })
-export class SampleModule {}
+export class PersonModule {}

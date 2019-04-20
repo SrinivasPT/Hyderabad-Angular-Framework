@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { DialogService } from '@progress/kendo-angular-dialog';
 import { Auth } from '../data-model';
 import { NGXLogger } from '../logger/logger.service';
 import { CacheService } from './cache.service';
@@ -13,6 +14,7 @@ export class SessionService {
     public cacheService: CacheService,
     public idleService: UserIdleService,
     public logger: NGXLogger,
+    public dialogService: DialogService,
     public databaseService: DatabaseService<any>,
     public fb: FormBuilder
   ) {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BaseDataService } from '../services/base-data.service';
 import { SessionService } from '../services/session.service';
 import { BaseComponent } from './base.component';
@@ -14,9 +16,9 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
   updatePermission = 'UPDATE_FULL'; // Can override in child component
 
   protected routeParamName: string; // value always set in child
-  protected entity = {} as T; // data on the form
-  protected original = {} as T; // data before any changes are made
+  protected formDataOriginal = {} as T; // data before any changes are made
   protected formData = {} as T;
+  dialogService = this.sessionService.dialogService;
 
   fb = this.sessionService.fb;
 
@@ -34,10 +36,10 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
   ngOnInit() {
     this.form = this.fb.group({ ...this.formData });
 
-    this.activatedRoute.data.subscribe(data => {
-      this.entity = data[this.routeParamName]; // routeParamName from child
-      this.loadData(this.id);
-      this.additionalFormInitialize(); // optional initialization in child
+    this.activatedRoute.data.subscribe((pageData: { pageData: T }) => {
+      this.formData = pageData.pageData;
+      this.formDataOriginal = Object.assign({}, this.formData);
+      this.form.patchValue(this.formData);
     });
   }
 
@@ -54,19 +56,27 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
   }
 
   hasChanged() {
-    return JSON.stringify(this.original) === JSON.stringify(this.entity) ? true : false;
+    const isChanged = JSON.stringify(this.form.value) === JSON.stringify(this.formDataOriginal) ? false : true;
+    return isChanged;
   }
 
   // used by canDeactive route guard
 
-  canDeactivate() {
+  canDeactivate(): Observable<boolean> | boolean {
     if (!this.hasChanged()) {
       return true;
     }
-    // return this.showConfirmationDialog().then(choice => {
-    //   // return choice !== ConfirmChoice.cancel;
-    //   return true;
-    // });
+
+    return this.dialogService
+      .open({
+        title: 'Confirmation?',
+        content: 'Form data changed. Do you want to save the changes?',
+        actions: [{ text: 'Yes', primary: true }, { text: 'No' }],
+        width: 450,
+        height: 200,
+        minWidth: 250
+      })
+      .result.pipe(map(result => (result['primary'] ? false : true)));
   }
 
   // showConfirmationDialog() {
@@ -86,7 +96,7 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
   }
 
   protected get saveEntity() {
-    return this.entity;
+    return this.formData;
   }
 
   // Use in child HTML template to limit functionality

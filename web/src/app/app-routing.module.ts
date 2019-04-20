@@ -12,11 +12,11 @@ const appRoutes: Routes = [
   //   canLoad: [AuthGuard]
   // },
   {
-    path: 'sample',
-    loadChildren: './sample/sample.module#SampleModule',
+    path: 'person',
+    loadChildren: './person/person.module#PersonModule',
     data: { preload: true }
   },
-  { path: '', redirectTo: '/sample', pathMatch: 'full' },
+  { path: '', redirectTo: '/person', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

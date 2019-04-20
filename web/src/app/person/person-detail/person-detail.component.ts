@@ -30,7 +30,7 @@ export class PersonDetailComponent extends BaseFormComponent<Person> {
   }
 
   loadDataOne(id: string) {
-    this.router.navigate(['./', id], { relativeTo: this.activatedRoute });
+    this.router.navigate(['../', id], { relativeTo: this.activatedRoute });
     // this.loadData(id);
   }
 
