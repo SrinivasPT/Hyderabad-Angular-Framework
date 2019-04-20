@@ -70,6 +70,7 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
     // Note: Here I wasteed couple of hours as I was not returning the observable.
     // Also converting the DialogResult to boolean also took some time.
     // Finally was able to figure out that map should be used to transform the observable.
+    // Just one more comment
     return this.dialogService
       .open({
         title: 'Confirmation?',
