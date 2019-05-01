@@ -16,8 +16,8 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
   updatePermission = 'UPDATE_FULL'; // Can override in child component
 
   protected routeParamName: string; // value always set in child
-  protected formDataOriginal = {} as T; // data before any changes are made
-  protected formData = {} as T;
+  protected originalEntity = {} as T; // data before any changes are made
+  protected entity = {} as T;
   dialogService = this.sessionService.dialogService;
 
   fb = this.sessionService.fb;
@@ -28,26 +28,18 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
     protected activatedRoute: ActivatedRoute
   ) {
     super(sessionService, baseService);
-    this.formData = this.setEntityInstance();
+    this.entity = this.setEntityInstance();
   }
 
   abstract setEntityInstance(): T;
 
   ngOnInit() {
-    this.form = this.fb.group({ ...this.formData });
+    this.form = this.fb.group({ ...this.entity });
 
     this.activatedRoute.data.subscribe((pageData: { pageData: T }) => {
-      this.formData = pageData.pageData;
-      this.formDataOriginal = Object.assign({}, this.formData);
-      this.form.patchValue(this.formData);
-    });
-  }
-
-  loadData(id: string) {
-    this.baseService.get(id).subscribe(data => {
-      this.formData = data;
-      this.form.patchValue(data);
-      console.log(data);
+      this.entity = pageData.pageData;
+      this.originalEntity = Object.assign({}, this.entity);
+      this.form.patchValue(this.entity);
     });
   }
 
@@ -56,7 +48,7 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
   }
 
   hasChanged() {
-    const isChanged = JSON.stringify(this.form.value) === JSON.stringify(this.formDataOriginal) ? false : true;
+    const isChanged = JSON.stringify(this.form.value) === JSON.stringify(this.originalEntity) ? false : true;
     return isChanged;
   }
 
@@ -70,7 +62,6 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
     // Note: Here I wasteed couple of hours as I was not returning the observable.
     // Also converting the DialogResult to boolean also took some time.
     // Finally was able to figure out that map should be used to transform the observable.
-    // Just one more comment
     return this.dialogService
       .open({
         title: 'Confirmation?',
@@ -83,30 +74,9 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
       .result.pipe(map(result => (result['primary'] ? false : true)));
   }
 
-  // showConfirmationDialog() {
-  //   return new Promise((resolve) => {
-  //       this.confirmationDialog.show();
-  //       this.save().then(() => {
-  //       }, (err) => {
-  //           this.logError(err); // Implemented in base parent component
-  //       });
-  //   });
-  // }
-
   save() {
     // Value of dataService set in the child to support different APIs
     // Optionally override saveEntity in the child
     // return this.updateService.update(this.dataService, this.saveEntity).then( . . .;
-  }
-
-  protected get saveEntity() {
-    return this.formData;
-  }
-
-  // Use in child HTML template to limit functionality
-  get editAllowed() {
-    // updatePermission could be overridden in the child
-    // return this.authorizationService.hasPermission(this.updatePermission);
-    return true;
   }
 }

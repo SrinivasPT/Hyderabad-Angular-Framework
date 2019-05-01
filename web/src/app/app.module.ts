@@ -4,9 +4,10 @@ import { CanDeactivateGuard, httpInterceptorProviders, HyderabadModule, LoggerMo
 import { environment } from 'src/environments/environment.prod';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,

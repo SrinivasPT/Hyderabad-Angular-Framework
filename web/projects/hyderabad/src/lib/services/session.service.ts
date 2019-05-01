@@ -9,6 +9,7 @@ import { UserIdleService } from './idle.service';
 
 @Injectable()
 export class SessionService {
+  isLoggedIn = false;
   auth: Auth = new Auth();
   constructor(
     public cacheService: CacheService,

@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace service.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class LogController : ControllerBase
+  [Route("api/[controller]")]
+  [ApiController]
+  public class LogController : ControllerBase
+  {
+    // POST api/Log
+    [HttpPost]
+    public void Post([FromBody] dynamic value)
     {
-        // POST api/Log
-        [HttpPost]
-        public void Post([FromBody] dynamic value)
-        {
-          Console.WriteLine(value);
-        }
-
+      Console.WriteLine(value);
     }
+
+  }
 }

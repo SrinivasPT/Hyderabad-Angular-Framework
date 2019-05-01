@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from 'hyderabad';
+import { LoginComponent } from './login';
 
 // import { AuthGuard } from './auth/auth.guard';
 // import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
     data: { preload: true }
   },
   { path: '', redirectTo: '/person', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

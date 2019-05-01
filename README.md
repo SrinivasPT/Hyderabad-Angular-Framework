@@ -4,3 +4,6 @@ git config --global user.email "you@example.com"
 RouterModule.forRoot(routes, {
     onSameUrlNavigation: 'reload'
   })
+
+
+
