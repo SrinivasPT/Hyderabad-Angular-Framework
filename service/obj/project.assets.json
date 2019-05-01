@@ -12078,11 +12078,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/juno/Documents/Coding/angular/hyderabad-framework/iris/service/service.csproj",
+      "projectUniqueName": "/home/juno/Documents/Coding/angular/hyderabad-framework/Hyderabad-Angular-Framework/service/service.csproj",
       "projectName": "service",
-      "projectPath": "/home/juno/Documents/Coding/angular/hyderabad-framework/iris/service/service.csproj",
+      "projectPath": "/home/juno/Documents/Coding/angular/hyderabad-framework/Hyderabad-Angular-Framework/service/service.csproj",
       "packagesPath": "/home/juno/.nuget/packages/",
-      "outputPath": "/home/juno/Documents/Coding/angular/hyderabad-framework/iris/service/obj/",
+      "outputPath": "/home/juno/Documents/Coding/angular/hyderabad-framework/Hyderabad-Angular-Framework/service/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
