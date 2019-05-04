@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
-
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { EditorModule } from '@progress/kendo-angular-editor';
+import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
+import { LayoutModule } from '@progress/kendo-angular-layout';
 import { MenuModule } from '@progress/kendo-angular-menu';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { RippleModule } from '@progress/kendo-angular-ripple';
-import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 
 @NgModule({
   declarations: [],
@@ -29,7 +29,8 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
     MenuModule,
     NotificationModule,
     RippleModule,
-    DateInputsModule
+    DateInputsModule,
+    LayoutModule
   ],
   exports: [
     // CommonModule,
@@ -44,7 +45,8 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
     MenuModule,
     NotificationModule,
     RippleModule,
-    DateInputsModule
+    DateInputsModule,
+    LayoutModule
   ]
 })
 export class KendoControlsModule {}

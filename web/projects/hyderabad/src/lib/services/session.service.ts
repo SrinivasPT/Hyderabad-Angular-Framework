@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DialogService } from '@progress/kendo-angular-dialog';
-import { Auth } from '../data-model';
+import { Auth } from '../iris-schema';
 import { NGXLogger } from '../logger/logger.service';
 import { CacheService } from './cache.service';
 import { DatabaseService } from './database.service';

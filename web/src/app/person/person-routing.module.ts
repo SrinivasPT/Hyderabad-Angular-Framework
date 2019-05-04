@@ -14,9 +14,7 @@ const crisisCenterRoutes: Routes = [
     component: PersonDetailComponent,
     runGuardsAndResolvers: 'always',
     canDeactivate: [CanDeactivateGuard],
-    resolve: {
-      pageData: PersonService
-    }
+    resolve: { pageData: PersonService }
   }
 ];
 

@@ -7,6 +7,8 @@ export class DatabaseService<T> {
   baseURL = 'https://localhost:5001/api';
   constructor(private http: HttpClient) {}
 
+  getAll = (controllerName: string): Observable<T> => this.http.get<T>(`${this.baseURL}/${controllerName}/`);
+
   get = (controllerName: string, id: string): Observable<T> => this.http.get<T>(`${this.baseURL}/${controllerName}/${id}`);
 
   save = (controllerName: string, payload: T) => this.http.post(`${this.baseURL}/${controllerName}/save`, payload);

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BaseDataService, SessionService } from 'hyderabad';
-import { TeamMember } from '../pmo-schema';
+import { TeamMemberDetail } from '../pmo-schema';
 
-@Injectable()
-export class PersonService extends BaseDataService<TeamMember> {
+@Injectable({ providedIn: 'root' })
+export class TeamMemberService extends BaseDataService<TeamMemberDetail> {
   constructor(public sessionService: SessionService) {
     super(sessionService);
   }

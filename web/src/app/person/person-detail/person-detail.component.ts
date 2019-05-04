@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BaseFormComponent, SessionService } from 'hyderabad';
-import { Person } from '../../data-model';
+import { BaseFormDetailComponent, SessionService } from 'hyderabad';
+import { TeamMember } from '../../pmo-schema';
 import { PersonService } from '../person.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { PersonService } from '../person.service';
   templateUrl: './person-detail.component.html',
   styleUrls: ['./person-detail.component.css']
 })
-export class PersonDetailComponent extends BaseFormComponent<Person> {
+export class PersonDetailComponent extends BaseFormDetailComponent<TeamMember> {
   // form: FormGroup;
   modal = {};
   // id = '80';
@@ -25,8 +25,8 @@ export class PersonDetailComponent extends BaseFormComponent<Person> {
     super(sessionSerive, personService, activatedRoute);
   }
 
-  setEntityInstance(): Person {
-    return new Person();
+  setEntityInstance(): TeamMember {
+    return new TeamMember();
   }
 
   loadDataOne(id: string) {

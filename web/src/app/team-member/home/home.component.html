@@ -1,0 +1,13 @@
+<p>Team Member home works!</p>
+
+<kendo-tabstrip (tabSelect)="onTabSelect($event)">
+  <kendo-tabstrip-tab [title]="'Detail'" [selected]="true">
+    <ng-template kendoTabContent> <router-outlet></router-outlet></ng-template>
+  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="'Experience'">
+    <ng-template kendoTabContent><router-outlet></router-outlet> </ng-template>
+  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="'Allocations'">
+    <ng-template kendoTabContent> <router-outlet></router-outlet></ng-template>
+  </kendo-tabstrip-tab>
+</kendo-tabstrip>

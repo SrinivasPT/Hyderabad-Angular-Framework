@@ -10,7 +10,7 @@ import { BaseComponent } from './base.component';
 @Component({
   template: ''
 })
-export abstract class BaseFormComponent<T> extends BaseComponent<T> implements OnInit {
+export abstract class BaseFormDetailComponent<T> extends BaseComponent<T> implements OnInit {
   form: FormGroup;
   id: string;
   updatePermission = 'UPDATE_FULL'; // Can override in child component
@@ -31,7 +31,7 @@ export abstract class BaseFormComponent<T> extends BaseComponent<T> implements O
     this.entity = this.setEntityInstance();
   }
 
-  abstract setEntityInstance(): T;
+  protected abstract setEntityInstance(): T;
 
   ngOnInit() {
     this.form = this.fb.group({ ...this.entity });

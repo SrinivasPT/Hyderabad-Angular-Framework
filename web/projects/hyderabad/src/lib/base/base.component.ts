@@ -5,7 +5,7 @@ import { SessionService } from '../services/session.service';
 @Component({
   template: ''
 })
-export class BaseComponent<T> {
+export abstract class BaseComponent<T> {
   constructor(protected sessionService: SessionService, protected baseService: BaseDataService<T>) {
     this.logNavigation();
   }

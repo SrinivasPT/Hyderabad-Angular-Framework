@@ -17,6 +17,11 @@ const appRoutes: Routes = [
     loadChildren: './person/person.module#PersonModule',
     data: { preload: true }
   },
+  {
+    path: 'team-member',
+    loadChildren: './team-member/team-member.module#TeamMemberModule',
+    data: { preload: false }
+  },
   { path: '', redirectTo: '/person', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent }

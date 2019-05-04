@@ -10,7 +10,7 @@ namespace PtcApi.Controllers
     {
       IActionResult ret;
 
-      // Create new exception with generic message        
+      // Create new exception with generic message
       ret = StatusCode(
           StatusCodes.Status500InternalServerError, new Exception(msg, ex));
 
