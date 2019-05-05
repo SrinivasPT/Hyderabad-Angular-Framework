@@ -1,12 +1,12 @@
 import { OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BaseComponent, BaseDataService, SessionService } from 'hyderabad';
 
 export abstract class BaseFormListComponent<T> extends BaseComponent<T> implements OnInit {
-  form: FormGroup;
-  gridData: T[];
+  // form: FormGroup;
+  gridData: T[] = [];
   originalGridData: T[];
+  searchCriteria: any = {};
   fb = this.sessionService.fb;
 
   constructor(
@@ -15,18 +15,20 @@ export abstract class BaseFormListComponent<T> extends BaseComponent<T> implemen
     protected activatedRoute: ActivatedRoute
   ) {
     super(sessionService, baseService);
-    this.gridData = this.setEntityInstance();
+    this.searchCriteria = this.setEntityInstance();
   }
 
-  protected abstract setEntityInstance(): T[];
-
   ngOnInit() {
+    super.ngOnInit();
     this.form = this.fb.group({ ...this.gridData });
 
     this.activatedRoute.data.subscribe((data: { data: T[] }) => {
       this.gridData = data.data;
       this.originalGridData = Object.assign({}, this.gridData);
       this.form.patchValue(this.gridData);
+
+      // TODO: How do we know tha grid name is list only. What will happen in the case of multiple grids?
+      this.populateGridWithData('list', this.gridData);
     });
   }
 }

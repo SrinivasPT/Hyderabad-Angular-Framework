@@ -18,11 +18,16 @@ const appRoutes: Routes = [
     data: { preload: true }
   },
   {
+    path: '',
+    loadChildren: './team-member/team-member.module#TeamMemberModule',
+    data: { preload: false }
+  },
+  {
     path: 'team-member',
     loadChildren: './team-member/team-member.module#TeamMemberModule',
     data: { preload: false }
   },
-  { path: '', redirectTo: '/person', pathMatch: 'full' },
+  // { path: '', redirectTo: '/person', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent }
 ];

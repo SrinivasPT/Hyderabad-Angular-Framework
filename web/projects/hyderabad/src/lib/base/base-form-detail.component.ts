@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -11,7 +10,7 @@ import { BaseComponent } from './base.component';
   template: ''
 })
 export abstract class BaseFormDetailComponent<T> extends BaseComponent<T> implements OnInit {
-  form: FormGroup;
+  // form: FormGroup;
   id: string;
   updatePermission = 'UPDATE_FULL'; // Can override in child component
 
@@ -31,7 +30,7 @@ export abstract class BaseFormDetailComponent<T> extends BaseComponent<T> implem
     this.entity = this.setEntityInstance();
   }
 
-  protected abstract setEntityInstance(): T;
+  // protected abstract setEntityInstance(): T;
 
   ngOnInit() {
     this.form = this.fb.group({ ...this.entity });
