@@ -1,0 +1,10 @@
+<kendo-grid
+  #grid
+  [data]="gridSettings.gridView"
+  [pageable]="true"
+  [pageSize]="gridSettings.pageSize"
+  [skip]="gridSettings.skip"
+  (pageChange)="pageChange($event)"
+  (sortChange)="sortChange($event)"
+>
+</kendo-grid>

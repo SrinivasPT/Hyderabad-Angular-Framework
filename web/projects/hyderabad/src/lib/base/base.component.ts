@@ -28,6 +28,9 @@ export abstract class BaseComponent<T> implements OnInit {
 
   private logNavigation() {}
 
+  /**
+   * GRID RELATED FUNCTIONS - START
+   */
   protected gridPageChange(gridName: string, event: PageChangeEvent) {
     const gridSetting = this.gridCol.get(gridName);
     gridSetting.skip = event.skip;
@@ -60,4 +63,6 @@ export abstract class BaseComponent<T> implements OnInit {
   protected gridSortChange(gridName: string) {
     console.log(`In the BaseComponent::gridSortChange() function`);
   }
+
+  // GRID CHANGES END
 }

@@ -1,12 +1,13 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HyderabadComponent } from './hyderabad.component';
-import { HeaderBarComponent } from './components/page/header-bar/header-bar.component';
-import { FooterBarComponent } from './components/page/footer-bar/footer-bar.component';
-import { KendoControlsModule } from './kendo-controls/kendo-controls.module';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { MessagesComponent } from './components/messages/messages.component';
-import { HyderabadControlsModule } from './components/custom-controls/hyderabad-controls.module';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { HyderabadControlsModule } from './components/custom-controls/hyderabad-controls.module';
+import { GridComponent } from './components/grid/grid.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { FooterBarComponent } from './components/page/footer-bar/footer-bar.component';
+import { HeaderBarComponent } from './components/page/header-bar/header-bar.component';
+import { HyderabadComponent } from './hyderabad.component';
+import { KendoControlsModule } from './kendo-controls/kendo-controls.module';
 import { PrettyPrintPipe } from './pipes/pretty-print.pipe';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PrettyPrintPipe } from './pipes/pretty-print.pipe';
     FooterBarComponent,
     PageNotFoundComponent,
     MessagesComponent,
-    PrettyPrintPipe
+    PrettyPrintPipe,
+    GridComponent
   ],
   imports: [CommonModule, KendoControlsModule],
   exports: [
@@ -26,7 +28,8 @@ import { PrettyPrintPipe } from './pipes/pretty-print.pipe';
     HeaderBarComponent,
     FooterBarComponent,
     PageNotFoundComponent,
-    PrettyPrintPipe
+    PrettyPrintPipe,
+    GridComponent
   ]
 })
 export class HyderabadModule {

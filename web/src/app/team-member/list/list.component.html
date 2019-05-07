@@ -1,9 +1,12 @@
 <p>Team Member List from List Page</p>
-<kendo-grid
+<!-- <kendo-grid
   [data]="gridCol.get('list').gridView"
   [pageable]="true"
   [pageSize]="gridCol.get('list').pageSize"
   [skip]="gridCol.get('list').skip"
   (pageChange)="gridPageChange('list', $event)"
   (sortChange)="gridSortChange('list', $event)"
-></kendo-grid>
+>
+</kendo-grid> -->
+
+<hyd-grid [gridSettings]="this.gridCol.get('list')"></hyd-grid>
