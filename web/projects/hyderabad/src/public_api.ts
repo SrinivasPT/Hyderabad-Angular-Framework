@@ -4,6 +4,7 @@
 
 export * from './lib/base/base-form-detail.component';
 export * from './lib/base/base.component';
+export * from './lib/base/base.home.component';
 export * from './lib/components/grid/grid.component';
 export * from './lib/components/page-not-found/page-not-found.component';
 export * from './lib/components/page/footer-bar/footer-bar.component';

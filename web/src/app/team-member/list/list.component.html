@@ -9,4 +9,22 @@
 >
 </kendo-grid> -->
 
+<kendo-tabstrip (tabSelect)="onTabSelect($event)">
+  <kendo-tabstrip-tab [title]="'Active'" [selected]="true">
+    <ng-template kendoTabContent>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="'Terminated'">
+    <ng-template kendoTabContent>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="'All'">
+    <ng-template kendoTabContent>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </kendo-tabstrip-tab>
+</kendo-tabstrip>
+
 <hyd-grid [gridSettings]="this.gridCol.get('list')"></hyd-grid>

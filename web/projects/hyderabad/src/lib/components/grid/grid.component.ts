@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ContentChildren, Input, ViewChild } from '@angular/core';
-import { ColumnComponent } from '@progress/kendo-angular-grid';
+import { ColumnComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
 import * as R from 'ramda';
 import { GridSetting } from '../../iris-schema';
 
@@ -44,6 +44,14 @@ export class GridComponent implements AfterViewInit {
     });
 
     return dynamicColumns;
+  }
+
+  pageChange(event: PageChangeEvent) {
+    this.gridSettings.skip = event.skip;
+    this.gridSettings.gridView = {
+      data: R.clone(this.gridSettings.gridData).slice(this.gridSettings.skip, this.gridSettings.skip + this.gridSettings.pageSize),
+      total: this.gridSettings.gridView.total
+    };
   }
 
   getLabel = (label: string) => (label.charAt(0).toUpperCase() + label.slice(1)).split(/(?=[A-Z])/).join(' ');
