@@ -1,3 +1,16 @@
-<p>
-  detail works!
-</p>
+<form [formGroup]="form" class="k-form">
+  <div class="d-flex flex-wrap">
+    <hyd-textbox class="col-md-3" [group]="form" [frmControlName]="'id'"></hyd-textbox>
+    <hyd-textbox class="col-md-3" [group]="form" [frmControlName]="'firstName'"></hyd-textbox>
+    <hyd-textbox class="col-md-3" [group]="form" [frmControlName]="'lastName'"></hyd-textbox>
+    <hyd-textbox class="col-md-3" [group]="form" [frmControlName]="'country'"></hyd-textbox>
+    <hyd-datepicker class="col-md-3" [group]="form" [frmControlName]="'joinDate'"></hyd-datepicker>
+    <hyd-textarea class="col-md-3" [group]="form" [frmControlName]="'country'"></hyd-textarea>
+  </div>
+</form>
+
+<!-- <div>{{ form.value | prettyPrint: 2 }}</div> -->
+<div class="card-body">
+  <button (click)="showDebugInfo = !showDebugInfo">Show Debug Information</button>
+  <pre *ngIf="showDebugInfo" [innerHtml]="form.value | prettyPrint: 2"></pre>
+</div>

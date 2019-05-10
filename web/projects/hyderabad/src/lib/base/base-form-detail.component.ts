@@ -35,8 +35,8 @@ export abstract class BaseFormDetailComponent<T> extends BaseComponent<T> implem
   ngOnInit() {
     this.form = this.fb.group({ ...this.entity });
 
-    this.activatedRoute.data.subscribe((pageData: { pageData: T }) => {
-      this.entity = pageData.pageData;
+    this.activatedRoute.data.subscribe((pageData: { data: T }) => {
+      this.entity = this.baseService.parse(pageData.data);
       this.originalEntity = Object.assign({}, this.entity);
       this.form.patchValue(this.entity);
     });

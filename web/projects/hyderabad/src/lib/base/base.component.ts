@@ -11,7 +11,6 @@ import { SessionService } from '../services/session.service';
 })
 export abstract class BaseComponent<T> implements OnInit {
   form: FormGroup;
-  // gridCol: any = {};
   gridCol: Map<string, GridSetting> = new Map<string, GridSetting>();
 
   constructor(protected sessionService: SessionService, protected baseService: BaseDataService<T>) {
@@ -22,7 +21,9 @@ export abstract class BaseComponent<T> implements OnInit {
     // this.loadGridWithChanges('list'); // TODO: Hardcoding need to be changed
   }
 
-  protected abstract setEntityInstance(): T;
+  protected setEntityInstance(data: any = {}): T {
+    return {} as T;
+  }
 
   protected logError(errorMessage: string) {}
 

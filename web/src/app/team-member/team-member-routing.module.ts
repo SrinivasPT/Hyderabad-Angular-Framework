@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanDeactivateGuard } from 'hyderabad';
+import { TeamMemberAllocationService } from '../business-services/team-member-allocation.service';
+import { TeamMemberDetailService } from '../business-services/team-member-detail.service';
+import { TeamMemberExperienceService } from '../business-services/team-member-experience.service';
 import { TeamMemberService } from '../business-services/team-member.service';
 import { AllocationComponent } from './allocation/allocation.component';
 import { DetailComponent } from './detail/detail.component';
@@ -19,9 +22,10 @@ const routes: Routes = [
     path: ':id',
     component: HomeComponent,
     children: [
-      { path: 'detail', component: DetailComponent },
-      { path: 'experience', component: ExperienceComponent },
-      { path: 'allocation', component: AllocationComponent }
+      { path: '', component: DetailComponent, resolve: { data: TeamMemberDetailService } },
+      { path: 'detail', component: DetailComponent, resolve: { data: TeamMemberDetailService } },
+      { path: 'experience', component: ExperienceComponent, resolve: { data: TeamMemberExperienceService } },
+      { path: 'allocation', component: AllocationComponent, resolve: { data: TeamMemberAllocationService } }
     ]
   }
 ];

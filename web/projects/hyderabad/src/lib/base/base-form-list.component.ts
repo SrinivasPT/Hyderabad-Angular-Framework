@@ -26,11 +26,6 @@ export abstract class BaseFormListComponent<T> extends BaseComponent<T> implemen
 
     this.activatedRoute.data.subscribe((data: { data: T[] }) => {
       this.reloadGrid(data.data);
-      // this.gridData = data.data;
-      // this.originalGridData = Object.assign({}, this.gridData);
-      // this.form.patchValue(this.gridData);
-      // TODO: How do we know tha grid name is list only. What will happen in the case of multiple grids?
-      // this.populateGridWithData('list', this.gridData);
     });
   }
 

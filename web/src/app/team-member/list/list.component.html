@@ -1,28 +1,15 @@
 <p>Team Member List from List Page</p>
-<!-- <kendo-grid
-  [data]="gridCol.get('list').gridView"
-  [pageable]="true"
-  [pageSize]="gridCol.get('list').pageSize"
-  [skip]="gridCol.get('list').skip"
-  (pageChange)="gridPageChange('list', $event)"
-  (sortChange)="gridSortChange('list', $event)"
->
-</kendo-grid> -->
 
 <kendo-tabstrip (tabSelect)="onTabSelect($event)">
-  <kendo-tabstrip-tab [title]="'Active'" [selected]="true">
-    <ng-template kendoTabContent>
-      <hyd-grid [gridSettings]="gridSettings"></hyd-grid>
-    </ng-template>
-  </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="'Terminated'">
-    <ng-template kendoTabContent>
-      <hyd-grid [gridSettings]="gridSettings"></hyd-grid>
-    </ng-template>
-  </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="'All'">
-    <ng-template kendoTabContent>
-      <hyd-grid [gridSettings]="gridSettings"></hyd-grid>
-    </ng-template>
-  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="'Active'" [selected]="true"> </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="'Terminated'"> </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="'All'"> </kendo-tabstrip-tab>
 </kendo-tabstrip>
+
+<hyd-grid [gridSettings]="gridSettings">
+  <kendo-grid-column field="id" title="ID">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <a [routerLink]="['/team-member', dataItem.id]">{{ dataItem.id }}</a>
+    </ng-template>
+  </kendo-grid-column>
+</hyd-grid>

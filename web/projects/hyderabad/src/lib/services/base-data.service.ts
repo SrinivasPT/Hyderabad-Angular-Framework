@@ -42,6 +42,10 @@ export abstract class BaseDataService<T> implements Resolve<T> {
 
   getCacheKey = (id: string = '', action: string = '') => `RecordID=${id}::${this.controllerName()}::${action}`;
 
+  parse(entity: T): T {
+    return entity;
+  }
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Observable<never> {
     const id = route.paramMap.get('id');
 
