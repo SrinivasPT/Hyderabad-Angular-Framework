@@ -29,7 +29,7 @@ export class GridSetting {
   public newEntityNodeName: string;
   public showEditForm: false;
 
-  constructor(public data: any[], newEntityName: string = '') {
+  constructor(public data: any[] = [], newEntityName: string = '') {
     this.gridView = { data, total: data.length };
     this.gridData = clone(data);
     this.skip = 0;

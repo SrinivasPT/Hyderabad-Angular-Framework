@@ -13,55 +13,44 @@ namespace service.Controllers
   public class TeamMemberController : ControllerBase
   {
 
-    // GET api/Person
-    [HttpGet]
-    public dynamic Get()
+    [HttpPost("Search")]
+    public dynamic Search([FromBody] dynamic criteria)
     {
-      // return new string[] { "value1", "value2" };
       var nodes = (new[] {
-                new { Id = 1000, TeamMemberId = 100, FirstName = "Srinivas", LastName = "Peeta", Country = "India"},
-                new { Id = 2001, TeamMemberId = 1000, FirstName = "Sreelatha", LastName = "Peeta", Country = "India"},
-                new { Id = 2002, TeamMemberId = 2001, FirstName = "Anjali", LastName = "Joe", Country = "India"},
-                new { Id = 2003, TeamMemberId = 2001, FirstName = "Keerthi", LastName = "Joe", Country = "India"},
+                new { Id = 1000, TeamMemberId = 100, FirstName = "Srinivas", LastName = "Peeta", Country = "India", Status = "ACTIVE"},
+                new { Id = 2001, TeamMemberId = 1000, FirstName = "Sreelatha", LastName = "Peeta", Country = "India", Status = "ACTIVE"},
+                new { Id = 2002, TeamMemberId = 2001, FirstName = "Anjali", LastName = "Joe", Country = "India", Status = "ACTIVE"},
+                new { Id = 2003, TeamMemberId = 2001, FirstName = "Keerthi", LastName = "Joe", Country = "India", Status = "ACTIVE"},
+                new { Id = 2004, TeamMemberId = 2002, FirstName = "Harry", LastName = "Joe", Country = "India", Status = "INACTIVE"},
+                new { Id = 2005, TeamMemberId = 2002, FirstName = "Beery", LastName = "Joe", Country = "India", Status = "INACTIVE"},
                 }).ToList();
-      return nodes;
+      return nodes.FindAll(node => node.Status == criteria.selectedTab.ToString());
     }
 
-    // GET api/Person/5
     [HttpGet("{id}")]
     public dynamic Get(int id)
     {
-
       var nodes = (new[] {
-                new { Id = 1000, TeamMemberId = 100, FirstName = "Srinivas", LastName = "Peeta", Country = "India"},
-                new { Id = 2001, TeamMemberId = 1000, FirstName = "Sreelatha", LastName = "Peeta", Country = "India"},
-                new { Id = 2002, TeamMemberId = 2001, FirstName = "Anjali", LastName = "Joe", Country = "India"},
-                new { Id = 2003, TeamMemberId = 2001, FirstName = "Keerthi", LastName = "Joe", Country = "India"},
+                new { Id = 1000, TeamMemberId = 100, FirstName = "Srinivas", LastName = "Peeta", Country = "India", Status = "ACTIVE"},
+                new { Id = 2001, TeamMemberId = 1000, FirstName = "Sreelatha", LastName = "Peeta", Country = "India", Status = "ACTIVE"},
+                new { Id = 2002, TeamMemberId = 2001, FirstName = "Anjali", LastName = "Joe", Country = "India", Status = "ACTIVE"},
+                new { Id = 2003, TeamMemberId = 2001, FirstName = "Keerthi", LastName = "Joe", Country = "India", Status = "ACTIVE"},
+                new { Id = 2004, TeamMemberId = 2002, FirstName = "Harry", LastName = "Joe", Country = "India", Status = "INACTIVE"},
+                new { Id = 2005, TeamMemberId = 2002, FirstName = "Beery", LastName = "Joe", Country = "India", Status = "INACTIVE"},
                 }).ToList();
-
-      // var node = new
-      // {
-      //   Id = id,
-      //   FirstName = "Srinivas",
-      //   LastName = "Peeta",
-      //   Country = "India",
-      // };
       return nodes.Find(node => node.Id == id);
     }
 
-    // POST api/Person
     [HttpPost]
     public void Post([FromBody] string value)
     {
     }
 
-    // PUT api/Person/5
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] string value)
     {
     }
 
-    // DELETE api/Person/5
     [HttpDelete("{id}")]
     public void Delete(int id)
     {

@@ -7,4 +7,6 @@ export class PersonService extends BaseDataService<TeamMember> {
   constructor(public sessionService: SessionService) {
     super(sessionService);
   }
+
+  getSearchInstance() {}
 }

@@ -12,9 +12,9 @@ export abstract class BaseDataService<T> implements Resolve<T> {
   cacheService = this.sessionService.cacheService;
   databaseService = this.sessionService.databaseService;
 
-  getAll(): Observable<T> {
-    return this.cacheService.get(this.getCacheKey(), this.databaseService.getAll(this.controllerName()));
-  }
+  // getAll(criteria): Observable<T> {
+  //   return this.cacheService.get(this.getCacheKey(), this.databaseService.getAll(this.controllerName()));
+  // }
 
   get(id: string): Observable<T> {
     return this.cacheService.get(this.getCacheKey(id), this.databaseService.get(this.controllerName(), id));
@@ -25,19 +25,24 @@ export abstract class BaseDataService<T> implements Resolve<T> {
     return this.cacheService.get(this.getCacheKey(data['id']), this.databaseService.save(this.controllerName(), data));
   }
 
-  search(criteria: any): Observable<[T]> {
-    return this.cacheService.get(this.getCacheKey('Search', criteria), this.databaseService.search(this.controllerName(), criteria));
+  search(criteria: any): Observable<any> {
+    return this.cacheService.get(
+      this.getCacheKey('Search', JSON.stringify(criteria)),
+      this.databaseService.search(this.controllerName(), criteria)
+    );
   }
 
   delete(): boolean {
     return true;
   }
 
+  getSearchInstance() {}
+
   controllerName = (): string => this.constructor.name.replace('Service', '');
 
   getCacheKey = (id: string = '', action: string = '') => `RecordID=${id}::${this.controllerName()}::${action}`;
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<T> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Observable<never> {
     const id = route.paramMap.get('id');
 
     if (id) {
@@ -48,7 +53,7 @@ export abstract class BaseDataService<T> implements Resolve<T> {
         })
       );
     } else {
-      return this.getAll().pipe(
+      return this.search(this.getSearchInstance()).pipe(
         take(1),
         mergeMap(data => {
           return data ? of(data) : EMPTY;

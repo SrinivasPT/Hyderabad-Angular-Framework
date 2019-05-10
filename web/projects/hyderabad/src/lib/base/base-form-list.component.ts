@@ -1,11 +1,13 @@
 import { OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BaseComponent, BaseDataService, SessionService } from 'hyderabad';
+import { SelectEvent } from '@progress/kendo-angular-layout/dist/es2015/tabstrip/tabstrip-events';
+import { BaseComponent, BaseDataService, GridSetting, SessionService } from 'hyderabad';
+import * as R from 'ramda';
 
 export abstract class BaseFormListComponent<T> extends BaseComponent<T> implements OnInit {
   // form: FormGroup;
-  gridData: T[] = [];
-  originalGridData: T[];
+  gridSettings: GridSetting = new GridSetting();
+  tabValues = [];
   searchCriteria: any = {};
   fb = this.sessionService.fb;
 
@@ -20,15 +22,28 @@ export abstract class BaseFormListComponent<T> extends BaseComponent<T> implemen
 
   ngOnInit() {
     super.ngOnInit();
-    this.form = this.fb.group({ ...this.gridData });
+    // this.form = this.fb.group({ ...this.gridData });
 
     this.activatedRoute.data.subscribe((data: { data: T[] }) => {
-      this.gridData = data.data;
-      this.originalGridData = Object.assign({}, this.gridData);
-      this.form.patchValue(this.gridData);
-
+      this.reloadGrid(data.data);
+      // this.gridData = data.data;
+      // this.originalGridData = Object.assign({}, this.gridData);
+      // this.form.patchValue(this.gridData);
       // TODO: How do we know tha grid name is list only. What will happen in the case of multiple grids?
-      this.populateGridWithData('list', this.gridData);
+      // this.populateGridWithData('list', this.gridData);
     });
+  }
+
+  reloadGrid(data: any[]) {
+    this.gridSettings.gridView = {
+      data: R.clone(data).slice(this.gridSettings.skip, this.gridSettings.skip + this.gridSettings.pageSize),
+      total: data.length
+    };
+    this.gridSettings.gridData = data;
+  }
+
+  onTabSelect(event: SelectEvent) {
+    this.searchCriteria.selectedTab = this.tabValues[event.index];
+    this.baseService.search(this.searchCriteria).subscribe(data => this.reloadGrid(data));
   }
 }

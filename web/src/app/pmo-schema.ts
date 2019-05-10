@@ -1,3 +1,14 @@
+export class TeamMemberSearchCriteria {
+  constructor(
+    public id: string = null,
+    public TeamMemberId: string = null,
+    public firstName: string = null,
+    public lastName: string = null,
+    public country: string = null,
+    public selectedTab: string = 'ACTIVE'
+  ) {}
+}
+
 export class TeamMemberList {
   constructor(
     public id: string = null,
