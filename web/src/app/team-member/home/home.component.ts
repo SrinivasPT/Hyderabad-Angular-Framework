@@ -18,6 +18,6 @@ export class HomeComponent extends BaseHomeComponent implements OnInit {
   onTabSelect(event) {
     console.log(`Selected Tab ${JSON.stringify(event)}`);
     // this.router.navigate([`./${this.tabValues[event.index]}`], { relativeTo: this.route });
-    this.router.navigate([`./experience`], { relativeTo: this.route });
+    this.router.navigate(['./experience'], { relativeTo: this.route });
   }
 }

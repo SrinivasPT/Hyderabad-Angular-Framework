@@ -17,11 +17,11 @@ const appRoutes: Routes = [
     loadChildren: './person/person.module#PersonModule',
     data: { preload: true }
   },
-  {
-    path: '',
-    loadChildren: './team-member/team-member.module#TeamMemberModule',
-    data: { preload: false }
-  },
+  // {
+  //   path: '',
+  //   loadChildren: './team-member/team-member.module#TeamMemberModule',
+  //   data: { preload: false }
+  // },
   {
     path: 'team-member',
     loadChildren: './team-member/team-member.module#TeamMemberModule',

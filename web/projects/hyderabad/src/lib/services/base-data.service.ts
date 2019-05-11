@@ -47,7 +47,8 @@ export abstract class BaseDataService<T> implements Resolve<T> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Observable<never> {
-    const id = route.paramMap.get('id');
+    // const id = route.paramMap.get('id');
+    const id = state.url.split('/').reverse()[1];
 
     if (id) {
       return this.get(id).pipe(

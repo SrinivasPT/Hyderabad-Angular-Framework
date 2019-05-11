@@ -22,7 +22,7 @@ const routes: Routes = [
     path: ':id',
     component: HomeComponent,
     children: [
-      { path: '', component: DetailComponent, resolve: { data: TeamMemberDetailService } },
+      { path: '', redirectTo: 'detail', pathMatch: 'full' },
       { path: 'detail', component: DetailComponent, resolve: { data: TeamMemberDetailService } },
       { path: 'experience', component: ExperienceComponent, resolve: { data: TeamMemberExperienceService } },
       { path: 'allocation', component: AllocationComponent, resolve: { data: TeamMemberAllocationService } }

@@ -9,7 +9,7 @@
 <hyd-grid [gridSettings]="gridSettings">
   <kendo-grid-column field="id" title="ID">
     <ng-template kendoGridCellTemplate let-dataItem>
-      <a [routerLink]="['/team-member', dataItem.id]">{{ dataItem.id }}</a>
+      <a [routerLink]="['./', dataItem.id]">{{ dataItem.id }}</a>
     </ng-template>
   </kendo-grid-column>
 </hyd-grid>

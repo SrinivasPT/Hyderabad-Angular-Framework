@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BaseFormDetailComponent, SessionService } from 'hyderabad';
+import { BaseFormDetailComponent, GridSetting, SessionService } from 'hyderabad';
 import { TeamMemberExperienceService } from 'src/app/business-services';
 import { TeamMemberExperience } from 'src/app/pmo-schema';
 
@@ -9,6 +9,7 @@ import { TeamMemberExperience } from 'src/app/pmo-schema';
   templateUrl: './experience.component.html'
 })
 export class ExperienceComponent extends BaseFormDetailComponent<TeamMemberExperience> implements OnInit {
+  gridSettings: GridSetting = new GridSetting();
   constructor(
     protected sessionService: SessionService,
     protected teamMemberExperienceService: TeamMemberExperienceService,
@@ -17,5 +18,11 @@ export class ExperienceComponent extends BaseFormDetailComponent<TeamMemberExper
     super(sessionService, teamMemberExperienceService, activatedRoute);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    super.ngOnInit();
+  }
+
+  additionalFormInitialize() {
+    this.gridSettings = new GridSetting(Object.values(this.entity));
+  }
 }

@@ -6,10 +6,10 @@ import * as R from 'ramda';
 
 export abstract class BaseFormListComponent<T> extends BaseComponent<T> implements OnInit {
   // form: FormGroup;
-  gridSettings: GridSetting = new GridSetting();
   tabValues = [];
   searchCriteria: any = {};
   fb = this.sessionService.fb;
+  gridSettings: GridSetting = new GridSetting();
 
   constructor(
     protected sessionService: SessionService,

@@ -39,6 +39,7 @@ export abstract class BaseFormDetailComponent<T> extends BaseComponent<T> implem
       this.entity = this.baseService.parse(pageData.data);
       this.originalEntity = Object.assign({}, this.entity);
       this.form.patchValue(this.entity);
+      this.additionalFormInitialize();
     });
   }
 
