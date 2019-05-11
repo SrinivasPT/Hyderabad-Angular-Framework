@@ -12,11 +12,8 @@ export abstract class BaseDataService<T> implements Resolve<T> {
   cacheService = this.sessionService.cacheService;
   databaseService = this.sessionService.databaseService;
 
-  // getAll(criteria): Observable<T> {
-  //   return this.cacheService.get(this.getCacheKey(), this.databaseService.getAll(this.controllerName()));
-  // }
-
-  get(id: string): Observable<T> {
+  // Note: Observe the return type. It can either return single value or a collection based on the type of call.
+  get(id: string | number): Observable<T | T[]> {
     return this.cacheService.get(this.getCacheKey(id), this.databaseService.get(this.controllerName(), id));
   }
 
@@ -36,15 +33,12 @@ export abstract class BaseDataService<T> implements Resolve<T> {
     return true;
   }
 
-  getSearchInstance() {}
-
-  controllerName = (): string => this.constructor.name.replace('Service', '');
-
-  getCacheKey = (id: string = '', action: string = '') => `RecordID=${id}::${this.controllerName()}::${action}`;
-
-  parse(entity: T): T {
-    return entity;
-  }
+  // getValidationRules(formName: string) {
+  //   return this.cacheService.get(
+  //     this.getCacheKey(formName, 'ValidationRules'),
+  //     this.databaseService.getValidationRules(this.controllerName(), formName)
+  //   );
+  // }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Observable<never> {
     // const id = route.paramMap.get('id');
@@ -65,5 +59,15 @@ export abstract class BaseDataService<T> implements Resolve<T> {
         })
       );
     }
+  }
+
+  getSearchInstance() {}
+
+  controllerName = (): string => this.constructor.name.replace('Service', '');
+
+  getCacheKey = (id: string | number = '', action: string = '') => `RecordID=${id}::${this.controllerName()}::${action}`;
+
+  parse(entity: T): T {
+    return entity;
   }
 }

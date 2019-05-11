@@ -9,15 +9,19 @@ export class DatabaseService<T> {
 
   getAll = (controllerName: string): Observable<T> => this.http.get<T>(`${this.baseURL}/${controllerName}/`);
 
-  get = (controllerName: string, id: string): Observable<T> => this.http.get<T>(`${this.baseURL}/${controllerName}/${id}`);
+  get = (controllerName: string, id: string | number): Observable<T> => this.http.get<T>(`${this.baseURL}/${controllerName}/${id}`);
 
   save = (controllerName: string, payload: T) => this.http.post(`${this.baseURL}/${controllerName}/save`, payload);
 
+  // tslint:disable-next-line: semicolon
   post = (controllerName: string, action: string, payload: any): Observable<any> =>
-    // tslint:disable-next-line: semicolon
     this.http.post(`${this.baseURL}/${controllerName}/${action}`, payload);
 
+  // tslint:disable-next-line: semicolon
   search = (controllerName: string, payload: T): Observable<T[]> =>
-    // tslint:disable-next-line: semicolon
     this.http.post<T[]>(`${this.baseURL}/${controllerName}/search`, payload);
+
+  // // tslint:disable-next-line: max-line-length
+  // getValidationRules = (controllerName: string, id: string) =>
+  //   this.http.get<T>(`${this.baseURL}/${controllerName}/getValidationRules/${id}`);
 }

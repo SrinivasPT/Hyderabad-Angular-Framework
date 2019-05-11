@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BaseFormDetailComponent, SessionService } from 'hyderabad';
+import { BaseFormDetailComponent, FormFieldValidationService, SessionService } from 'hyderabad';
 import { TeamMember } from '../../pmo-schema';
 import { PersonService } from '../person.service';
 
@@ -20,9 +20,10 @@ export class PersonDetailComponent extends BaseFormDetailComponent<TeamMember> {
     protected sessionSerive: SessionService,
     protected personService: PersonService,
     protected activatedRoute: ActivatedRoute,
+    protected formFieldValidationService: FormFieldValidationService,
     private router: Router
   ) {
-    super(sessionSerive, personService, activatedRoute);
+    super(sessionSerive, personService, activatedRoute, formFieldValidationService);
   }
 
   setEntityInstance(): TeamMember {

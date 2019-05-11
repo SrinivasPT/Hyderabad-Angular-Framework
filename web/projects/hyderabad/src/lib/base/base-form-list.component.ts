@@ -16,20 +16,18 @@ export abstract class BaseFormListComponent<T> extends BaseComponent<T> implemen
     protected baseService: BaseDataService<T>,
     protected activatedRoute: ActivatedRoute
   ) {
-    super(sessionService, baseService);
+    super();
     this.searchCriteria = this.setEntityInstance();
   }
 
   ngOnInit() {
-    super.ngOnInit();
-    // this.form = this.fb.group({ ...this.gridData });
-
     this.activatedRoute.data.subscribe((data: { data: T[] }) => {
       this.reloadGrid(data.data);
     });
   }
 
   reloadGrid(data: any[]) {
+    this.gridSettings.skip = 0;
     this.gridSettings.gridView = {
       data: R.clone(data).slice(this.gridSettings.skip, this.gridSettings.skip + this.gridSettings.pageSize),
       total: data.length

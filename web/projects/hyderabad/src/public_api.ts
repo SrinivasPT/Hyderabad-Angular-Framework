@@ -23,6 +23,7 @@ export * from './lib/services/auth.service';
 export * from './lib/services/base-data.service';
 export * from './lib/services/cache.service';
 export * from './lib/services/database.service';
+export * from './lib/services/form-field-validation.service';
 export * from './lib/services/http-error-handler.service';
 export * from './lib/services/message.service';
 export * from './lib/services/session.service';

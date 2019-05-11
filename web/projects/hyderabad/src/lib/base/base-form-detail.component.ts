@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BaseDataService } from '../services/base-data.service';
+import { FormFieldValidationService } from '../services/form-field-validation.service';
 import { SessionService } from '../services/session.service';
+import { getComponentNameFromConstructor } from '../utility/common';
 import { BaseComponent } from './base.component';
 
 @Component({
@@ -11,8 +13,8 @@ import { BaseComponent } from './base.component';
 })
 export abstract class BaseFormDetailComponent<T> extends BaseComponent<T> implements OnInit {
   // form: FormGroup;
-  id: string;
-  updatePermission = 'UPDATE_FULL'; // Can override in child component
+  // Note: id could be a number or integer. So | operator is used to define id as string or number
+  id: number | string;
 
   protected routeParamName: string; // value always set in child
   protected originalEntity = {} as T; // data before any changes are made
@@ -24,9 +26,10 @@ export abstract class BaseFormDetailComponent<T> extends BaseComponent<T> implem
   constructor(
     protected sessionService: SessionService,
     protected baseService: BaseDataService<T>,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected formFieldValidationService: FormFieldValidationService
   ) {
-    super(sessionService, baseService);
+    super();
     this.entity = this.setEntityInstance();
   }
 
@@ -35,12 +38,19 @@ export abstract class BaseFormDetailComponent<T> extends BaseComponent<T> implem
   ngOnInit() {
     this.form = this.fb.group({ ...this.entity });
 
+    this.setupFormValidations();
+
     this.activatedRoute.data.subscribe((pageData: { data: T }) => {
       this.entity = this.baseService.parse(pageData.data);
       this.originalEntity = Object.assign({}, this.entity);
       this.form.patchValue(this.entity);
       this.additionalFormInitialize();
     });
+  }
+
+  protected setupFormValidations() {
+    const componentName = getComponentNameFromConstructor(this.constructor.name);
+    this.formFieldValidationService.setupForm(componentName, this.form);
   }
 
   protected additionalFormInitialize() {

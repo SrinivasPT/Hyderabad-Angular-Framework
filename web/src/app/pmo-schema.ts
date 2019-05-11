@@ -22,11 +22,12 @@ export class TeamMemberList {
 export class TeamMemberDetail {
   constructor(
     public id: string = null,
-    public TeamMemberId: string = null,
+    public teamMemberId: string = null,
     public firstName: string = null,
     public lastName: string = null,
     public country: string = null,
-    public joinDate: Date = null
+    public joinDate: Date = null,
+    public comments: Date = null
   ) {
     this.joinDate = new Date(joinDate);
   }

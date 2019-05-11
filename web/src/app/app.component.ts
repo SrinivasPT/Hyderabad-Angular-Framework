@@ -7,7 +7,7 @@ import { prop } from 'ramda';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'iris';
+  title = 'Hyderabad Angular Framework';
   constructor() {
     console.log(prop('x', { x: 100 }));
   }

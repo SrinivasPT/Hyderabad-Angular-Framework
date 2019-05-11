@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BaseFormDetailComponent, GridSetting, SessionService } from 'hyderabad';
+import { BaseFormDetailComponent, FormFieldValidationService, GridSetting, SessionService } from 'hyderabad';
 import { TeamMemberExperienceService } from 'src/app/business-services';
 import { TeamMemberExperience } from 'src/app/pmo-schema';
 
@@ -13,9 +13,10 @@ export class ExperienceComponent extends BaseFormDetailComponent<TeamMemberExper
   constructor(
     protected sessionService: SessionService,
     protected teamMemberExperienceService: TeamMemberExperienceService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected formFieldValidationService: FormFieldValidationService
   ) {
-    super(sessionService, teamMemberExperienceService, activatedRoute);
+    super(sessionService, teamMemberExperienceService, activatedRoute, formFieldValidationService);
   }
 
   ngOnInit() {
