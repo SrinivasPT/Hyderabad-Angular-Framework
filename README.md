@@ -1,10 +1,10 @@
 # Hyderabad Angular Framework 
 Objective of this overall solution/project is multi fold. 
-1. Create a starter project for any Enterprise Angular project
-2. Organize the Library (Currently all the functionality is in a single library. Later, once stabilized, it will be broken into multiple libraries with a specific functionality)
-3. Make use of all the typical angular framework features required by any Enterprise Angular applicaiton
-4. (Try to) show coding best practices
-5. Unit Test Automation (not yet done)
+- [X] Create a starter project for any Enterprise Angular project
+- [X] Organize the Library (Currently all the functionality is in a single library. Later, once stabilized, it will be broken into multiple libraries with a specific functionality)
+- [X] Make use of all the typical angular framework features required by any Enterprise Angular applicaiton
+- [X] (Try to) show coding best practices
+- [ ] Unit Test Automation (not yet done)
 
 ## Technology Involved
 1. Angular 7
