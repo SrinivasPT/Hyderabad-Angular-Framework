@@ -27,7 +27,22 @@ As I have mentioned erlier, the purpose of the project is multi fold and some of
 
 Let's explore each of these areas
 
-## View 1 - Organization
+## View 1 - Organization & Features
+### Angular Features
+1. Lazy Loading & Child Routes
+2. Resolver
+3. Business Services
+4. Interceptors
+5. Gaurds
+6. Reactive Forms
+7. 
+
+### Code Organization
+
+
+### VS Code Settings
+Setting leverages John Papas Angular Essentials which installs multiple addons. My customized setting for this tool can be found at
+
 
 ## View 2 - Library
 Library - Hyderabad Angular Framework provide following funcitonality
