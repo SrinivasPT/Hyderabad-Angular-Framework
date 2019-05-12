@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { DialogService } from '@progress/kendo-angular-dialog';
 import { Auth } from '../iris-schema';
-import { NGXLogger } from '../logger/logger.service';
-import { CacheService } from './cache.service';
 import { DatabaseService } from './database.service';
 import { UserIdleService } from './idle.service';
 
@@ -11,16 +7,7 @@ import { UserIdleService } from './idle.service';
 export class SessionService {
   isLoggedIn = false;
   auth: Auth = new Auth();
-  constructor(
-    public cacheService: CacheService,
-    public idleService: UserIdleService,
-    public logger: NGXLogger,
-    public dialogService: DialogService,
-    public databaseService: DatabaseService<any>,
-    public fb: FormBuilder
-  ) {
-    // super(cacheService, databaseService);
-  }
+  constructor(public idleService: UserIdleService, public databaseService: DatabaseService<any>) {}
 
   /**
    * Notes: This function is returning the promise. APP_INITIALIZER in AppModule will wait till this function is resolved

@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { SessionService } from 'hyderabad';
+import { Component, Injector, OnInit } from '@angular/core';
 import { BaseFormListComponent } from 'projects/hyderabad/src/lib/base/base-form-list.component';
 import { TeamMemberService } from 'src/app/business-services/team-member.service';
 import { TeamMemberList } from 'src/app/pmo-schema';
@@ -10,12 +8,8 @@ import { TeamMemberList } from 'src/app/pmo-schema';
   templateUrl: './list.component.html'
 })
 export class ListComponent extends BaseFormListComponent<TeamMemberList> implements OnInit {
-  constructor(
-    protected sessionService: SessionService,
-    protected teamMemberService: TeamMemberService,
-    protected activatedRoute: ActivatedRoute
-  ) {
-    super(sessionService, teamMemberService, activatedRoute);
+  constructor(protected injector: Injector, protected teamMemberService: TeamMemberService) {
+    super(injector, teamMemberService);
   }
 
   ngOnInit() {

@@ -1,16 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { EMPTY, of } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { mergeMap, take } from 'rxjs/operators';
-import { SessionService } from './session.service';
+import { CacheService } from './cache.service';
+import { DatabaseService } from './database.service';
 
 @Injectable()
 export abstract class BaseDataService<T> implements Resolve<T> {
-  constructor(protected sessionService: SessionService) {}
+  protected cacheService: CacheService;
+  protected databaseService: DatabaseService<any>;
 
-  cacheService = this.sessionService.cacheService;
-  databaseService = this.sessionService.databaseService;
+  constructor(protected injector: Injector) {
+    this.cacheService = this.injector.get(CacheService);
+    this.databaseService = this.injector.get(DatabaseService);
+  }
 
   // Note: Observe the return type. It can either return single value or a collection based on the type of call.
   get(id: string | number): Observable<T | T[]> {

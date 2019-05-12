@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DialogService } from '@progress/kendo-angular-dialog';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BaseDataService } from '../services/base-data.service';
@@ -19,17 +21,19 @@ export abstract class BaseFormDetailComponent<T> extends BaseComponent<T> implem
   protected routeParamName: string; // value always set in child
   protected originalEntity = {} as T; // data before any changes are made
   protected entity = {} as T;
-  dialogService = this.sessionService.dialogService;
+  protected sessionService: SessionService;
+  protected activatedRoute: ActivatedRoute;
+  protected formFieldValidationService: FormFieldValidationService;
+  protected dialogService: DialogService;
+  protected fb: FormBuilder;
 
-  fb = this.sessionService.fb;
-
-  constructor(
-    protected sessionService: SessionService,
-    protected baseService: BaseDataService<T>,
-    protected activatedRoute: ActivatedRoute,
-    protected formFieldValidationService: FormFieldValidationService
-  ) {
+  constructor(protected injector: Injector, protected baseService: BaseDataService<T>) {
     super();
+    this.sessionService = this.injector.get(SessionService);
+    this.activatedRoute = this.injector.get(ActivatedRoute);
+    this.fb = this.injector.get(FormBuilder);
+    this.dialogService = this.injector.get(DialogService);
+    this.formFieldValidationService = this.injector.get(FormFieldValidationService);
     this.entity = this.setEntityInstance();
   }
 

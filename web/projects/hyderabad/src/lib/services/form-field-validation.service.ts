@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import * as R from 'ramda';
 import { FieldValidationRule, FormFieldValidationErrorMessage } from '../iris-schema';
 import { BaseDataService } from './base-data.service';
-import { SessionService } from './session.service';
 
 @Injectable({ providedIn: 'root' })
 export class FormFieldValidationService extends BaseDataService<FieldValidationRule> {
-  constructor(public sessionService: SessionService) {
-    super(sessionService);
+  constructor(protected injector: Injector) {
+    super(injector);
   }
 
   setupForm(componentName: string, form: FormGroup) {

@@ -1,26 +1,27 @@
-import { OnInit } from '@angular/core';
+import { Injector, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SelectEvent } from '@progress/kendo-angular-layout/dist/es2015/tabstrip/tabstrip-events';
 import { BaseComponent, BaseDataService, GridSetting, SessionService } from 'hyderabad';
 import * as R from 'ramda';
 
 export abstract class BaseFormListComponent<T> extends BaseComponent<T> implements OnInit {
-  // form: FormGroup;
-  tabValues = [];
-  searchCriteria: any = {};
-  fb = this.sessionService.fb;
-  gridSettings: GridSetting = new GridSetting();
+  protected tabValues = [];
+  protected searchCriteria: any = {};
+  protected sessionService: SessionService;
+  protected activatedRoute: ActivatedRoute;
+  protected fb: FormBuilder;
+  protected gridSettings: GridSetting = new GridSetting();
 
-  constructor(
-    protected sessionService: SessionService,
-    protected baseService: BaseDataService<T>,
-    protected activatedRoute: ActivatedRoute
-  ) {
+  constructor(protected injector: Injector, protected baseService: BaseDataService<T>) {
     super();
-    this.searchCriteria = this.setEntityInstance();
+    this.sessionService = this.injector.get(SessionService);
+    this.activatedRoute = this.injector.get(ActivatedRoute);
+    this.fb = this.injector.get(FormBuilder);
   }
 
   ngOnInit() {
+    this.searchCriteria = this.setEntityInstance();
     this.activatedRoute.data.subscribe((data: { data: T[] }) => {
       this.reloadGrid(data.data);
     });

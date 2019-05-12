@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BaseFormDetailComponent, FormFieldValidationService, GridSetting, SessionService } from 'hyderabad';
+import { Component, Injector, OnInit } from '@angular/core';
+import { BaseFormDetailComponent, GridSetting } from 'hyderabad';
 import { TeamMemberExperienceService } from 'src/app/business-services';
 import { TeamMemberExperience } from 'src/app/pmo-schema';
 
@@ -10,13 +9,8 @@ import { TeamMemberExperience } from 'src/app/pmo-schema';
 })
 export class ExperienceComponent extends BaseFormDetailComponent<TeamMemberExperience> implements OnInit {
   gridSettings: GridSetting = new GridSetting();
-  constructor(
-    protected sessionService: SessionService,
-    protected teamMemberExperienceService: TeamMemberExperienceService,
-    protected activatedRoute: ActivatedRoute,
-    protected formFieldValidationService: FormFieldValidationService
-  ) {
-    super(sessionService, teamMemberExperienceService, activatedRoute, formFieldValidationService);
+  constructor(protected injector: Injector, protected teamMemberExperienceService: TeamMemberExperienceService) {
+    super(injector, teamMemberExperienceService);
   }
 
   ngOnInit() {
