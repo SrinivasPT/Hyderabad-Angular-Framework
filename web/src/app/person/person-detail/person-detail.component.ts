@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BaseFormDetailComponent, FormFieldValidationService, SessionService } from 'hyderabad';
+import { Component, Injector } from '@angular/core';
+import { Router } from '@angular/router';
+import { BaseFormDetailComponent } from 'hyderabad';
 import { TeamMember } from '../../pmo-schema';
 import { PersonService } from '../person.service';
 
@@ -16,14 +16,8 @@ export class PersonDetailComponent extends BaseFormDetailComponent<TeamMember> {
 
   showDebugInfo = false;
 
-  constructor(
-    protected sessionSerive: SessionService,
-    protected personService: PersonService,
-    protected activatedRoute: ActivatedRoute,
-    protected formFieldValidationService: FormFieldValidationService,
-    private router: Router
-  ) {
-    super(sessionSerive, personService, activatedRoute, formFieldValidationService);
+  constructor(protected injector: Injector, protected personService: PersonService, private router: Router) {
+    super(injector, personService);
   }
 
   setEntityInstance(): TeamMember {
@@ -32,14 +26,5 @@ export class PersonDetailComponent extends BaseFormDetailComponent<TeamMember> {
 
   loadDataOne(id: string) {
     this.router.navigate(['../', id], { relativeTo: this.activatedRoute });
-    // this.loadData(id);
   }
-
-  // loadData(id: string) {
-  //   this.personService.get(id).subscribe(data => {
-  //     this.modal = data;
-  //     this.form.patchValue(data);
-  //     console.log(data);
-  //   });
-  // }
 }
