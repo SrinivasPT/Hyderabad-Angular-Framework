@@ -6,7 +6,7 @@ Objective of this overall solution/project is multi fold.
 4. (Try to) show coding best practices
 5. Unit Test Automation (not yet done)
 
-### Technology Involved
+## Technology Involved
 1. Angular 7
 2. dotnet core 2.3
 3. SQL Server 2016
@@ -27,9 +27,9 @@ As I have mentioned erlier, the purpose of the project is multi fold and some of
 
 Let's explore each of these areas
 
-# View 1 - Organization
+## View 1 - Organization
 
-# View 2 - Library
+## View 2 - Library
 Library - Hyderabad Angular Framework provide following funcitonality
 1. Base Components for List, Home and Detail Pages
 2. Base Data Service for all the Business Services
@@ -51,11 +51,11 @@ This component takes care of the simple CRUD functionality and the get of the da
 
 ### Base Service
 
-# View 3 - Coding Practices
+## View 3 - Coding Practices
 
-# View 4 - Test Automation (future)
-
-
+## View 4 - Test Automation (future)
 
 
-
+# Credits
+##### Saikiran Mandhala
+Grid Logic for extending the Kendo grid to include the designer columns and the dynamic columns
