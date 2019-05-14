@@ -23,9 +23,19 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: '', redirectTo: 'detail', pathMatch: 'full' },
-      { path: 'detail', component: DetailComponent, resolve: { data: TeamMemberDetailService } },
-      { path: 'experience', component: ExperienceComponent, resolve: { data: TeamMemberExperienceService } },
-      { path: 'allocation', component: AllocationComponent, resolve: { data: TeamMemberAllocationService } }
+      { path: 'detail', component: DetailComponent, resolve: { data: TeamMemberDetailService }, canDeactivate: [CanDeactivateGuard] },
+      {
+        path: 'experience',
+        component: ExperienceComponent,
+        resolve: { data: TeamMemberExperienceService },
+        canDeactivate: [CanDeactivateGuard]
+      },
+      {
+        path: 'allocation',
+        component: AllocationComponent,
+        resolve: { data: TeamMemberAllocationService },
+        canDeactivate: [CanDeactivateGuard]
+      }
     ]
   }
 ];

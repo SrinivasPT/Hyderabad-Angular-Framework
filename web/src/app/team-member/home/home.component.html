@@ -1,9 +1,8 @@
 <p>Team Member home works!</p>
 
-<kendo-tabstrip (tabSelect)="onTabSelect($event)">
-  <kendo-tabstrip-tab [title]="item" [selected]="i == selectedTabIndex" *ngFor="let item of tabValues; let i = index">
-    <ng-template kendoTabContent>
-      <router-outlet></router-outlet>
-    </ng-template>
-  </kendo-tabstrip-tab>
+<kendo-tabstrip #tabStrip (tabSelect)="onTabSelect($event)">
+  <kendo-tabstrip-tab [title]="item" [selected]="i == selectedTabIndex" *ngFor="let item of tabValues; let i = index"> </kendo-tabstrip-tab>
 </kendo-tabstrip>
+
+<!-- Note: Not sure why, but when I keep the router outlet with in the kendo tabstrip, after couple of steps, getting error in canDeactivate Gaurd -->
+<router-outlet></router-outlet>
