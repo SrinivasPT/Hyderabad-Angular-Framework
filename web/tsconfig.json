@@ -15,7 +15,16 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "hyderabad": ["projects/hyderabad/src/public_api", "dist/hyderabad"],
-      "hyderabad/*": ["dist/hyderabad/*"]
+      "hyderabad/*": ["dist/hyderabad/*"],
+      "hyderabad-base": ["projects/hyderabad/src/lib/hyderabad-base/index"],
+      "hyderabad-common": ["projects/hyderabad/src/lib/hyderabad-common/index"],
+      "hyderabad-debug-controls": ["projects/hyderabad/src/lib/hyderabad-debug-controls/index"],
+      "hyderabad-grid": ["projects/hyderabad/src/lib/hyderabad-grid/index"],
+      "hyderabad-input-controls": ["projects/hyderabad/src/lib/hyderabad-input-controls/index"],
+      "hyderabad-logger": ["projects/hyderabad/src/lib/hyderabad-logger/index"],
+      "hyderabad-messages": ["projects/hyderabad/src/lib/hyderabad-messages/index"],
+      "hyderabad-page-controls": ["projects/hyderabad/src/lib/hyderabad-page-controls/index"],
+      "hyderabad-security": ["projects/hyderabad/src/lib/hyderabad-security/index"]
     }
   }
 }

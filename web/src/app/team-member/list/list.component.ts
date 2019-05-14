@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { BaseFormListComponent } from 'projects/hyderabad/src/lib/base/base-form-list.component';
+import { BaseFormListComponent } from 'projects/hyderabad/src/lib/hyderabad-base/base-form-list.component';
 import { TeamMemberService } from 'src/app/business-services/team-member.service';
 import { TeamMemberList } from 'src/app/pmo-schema';
 
