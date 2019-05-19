@@ -1,7 +1,8 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { DialogService } from '@progress/kendo-angular-dialog';
+import { DialogContentBase, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { NGXLogger } from 'hyderabad-logger';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SessionService } from '../hyderabad-common/services/session.service';
@@ -9,11 +10,11 @@ import { FormFieldValidationService } from '../hyderabad-security/services/form-
 import { IEntity } from '../iris-schema';
 import { getComponentNameFromConstructor } from '../utility/common';
 import { BaseDataService } from './base-data.service';
-import { BaseComponent } from './base.component';
 
 @Component({ template: '' })
-export class BaseFormDetailComponent<T extends IEntity> extends BaseComponent<T> implements OnInit {
-  form: FormGroup;
+export class BaseFormDetailDialogComponent<T extends IEntity> extends DialogContentBase implements OnInit {
+  protected form: FormGroup;
+  @Input() public formData: T;
   // Note: id could be a number or integer. So | operator is used to define id as string or number
   id: number | string;
 
@@ -21,14 +22,17 @@ export class BaseFormDetailComponent<T extends IEntity> extends BaseComponent<T>
   protected originalEntity = {} as T; // data before any changes are made
   protected entity: T = {} as T;
   protected sessionService: SessionService;
+  protected logger: NGXLogger;
   protected activatedRoute: ActivatedRoute;
   protected formFieldValidationService: FormFieldValidationService;
   protected dialogService: DialogService;
   protected fb: FormBuilder;
+  protected className = () => this.constructor.name;
 
   constructor(protected injector: Injector, protected baseService: BaseDataService<T>) {
-    super();
+    super(injector.get(DialogRef));
     this.sessionService = this.injector.get(SessionService);
+    this.logger = this.injector.get(NGXLogger);
     this.activatedRoute = this.injector.get(ActivatedRoute);
     this.fb = this.injector.get(FormBuilder);
     this.dialogService = this.injector.get(DialogService);
@@ -39,6 +43,7 @@ export class BaseFormDetailComponent<T extends IEntity> extends BaseComponent<T>
   protected setEntityInstance(data: any = {}): T {
     return {} as T;
   }
+
   // protected abstract setEntityInstance(): T;
 
   ngOnInit() {
@@ -46,8 +51,9 @@ export class BaseFormDetailComponent<T extends IEntity> extends BaseComponent<T>
 
     this.setupFormValidations();
 
-    this.activatedRoute.data.subscribe((pageData: { data: T }) => {
-      this.entity = this.baseService.parse(pageData.data as T);
+    this.baseService.get(this.formData.id).subscribe((data: T) => {
+      this.logger.debug(this.className, 'ngOnInit', data);
+      this.entity = this.baseService.parse(data);
       this.originalEntity = Object.assign({}, this.entity);
       this.form.patchValue(this.entity);
       this.additionalFormInitialize();

@@ -11,6 +11,9 @@ export class DatabaseService<T> {
 
   get = (controllerName: string, id: string | number): Observable<T> => this.http.get<T>(`${this.baseURL}/${controllerName}/${id}`);
 
+  getByParentID = (controllerName: string, id: string | number): Observable<T> =>
+    this.http.get<T>(`${this.baseURL}/${controllerName}/GetByParentID/${id}`);
+
   save = (controllerName: string, payload: T) => this.http.post(`${this.baseURL}/${controllerName}/save`, payload);
 
   // tslint:disable-next-line: semicolon

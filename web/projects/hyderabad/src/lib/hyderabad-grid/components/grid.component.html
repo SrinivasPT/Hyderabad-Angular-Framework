@@ -7,4 +7,10 @@
   (pageChange)="pageChange($event)"
   (sortChange)="sortChange($event)"
 >
+  <kendo-grid-column title="Edit">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <button kendoGridEditCommand type="button" (click)="onRowEdit(dataItem)">Edit</button>
+      <button kendoGridEditCommand type="button" (click)="onRowRemove(dataItem)">Remove</button>
+    </ng-template>
+  </kendo-grid-column>
 </kendo-grid>

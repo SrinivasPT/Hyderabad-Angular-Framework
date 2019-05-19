@@ -13,17 +13,32 @@ namespace service.Controllers
   public class TeamMemberExperienceController : ControllerBase
   {
 
+    [HttpGet("GetByParentID/{id}")]
+    public dynamic GetByParentID(int id)
+    {
+      var nodes = (
+                new[] {
+                  new {Id = 1000, Experience = new[] {
+                    new { Id = 1000, TeamMemberID=1000, CompanyName = "Cognizant",  FromDate = DateTime.Now.AddMonths(-32),ToDate = DateTime.Now.AddMonths(-12), City = "Hyderabad", Country = "India", Status = "ACTIVE"},
+                    new { Id = 1001, TeamMemberID=1000, CompanyName = "Infosys",  FromDate = DateTime.Now.AddMonths(-64),ToDate = DateTime.Now.AddMonths(-32), City="Hyderabad", Country = "India", Status = "ACTIVE"},
+                    new { Id = 1002, TeamMemberID=1000, CompanyName = "eGain",  FromDate = DateTime.Now.AddMonths(-68),ToDate = DateTime.Now.AddMonths(-64), City="Hyderabad", Country = "India", Status = "ACTIVE"},
+                    new { Id = 1003, TeamMemberID=1000, CompanyName = "FES",  FromDate = DateTime.Now.AddMonths(-90),ToDate = DateTime.Now.AddMonths(-68), City="Hyderabad", Country = "India", Status = "ACTIVE"},
+                }}}).ToList();
+      return nodes.Find(node => node.Id == id);
+    }
+
     [HttpGet("{id}")]
     public dynamic Get(int id)
     {
       var nodes = (new[] {
-                new { Id = 1000, TeamMemberID=1000, CompanyName = "Cognizant", FromDate = DateTime.Now, ToDate = DateTime.Now, City = "Hyderabad", Country = "India", Status = "ACTIVE"},
-                new { Id = 1000, TeamMemberID=1000, CompanyName = "Infosys", FromDate = DateTime.Now, ToDate = DateTime.Now, City="Hyderabad", Country = "India", Status = "ACTIVE"},
-                new { Id = 1000, TeamMemberID=1000, CompanyName = "eGain", FromDate = DateTime.Now, ToDate = DateTime.Now, City="Hyderabad", Country = "India", Status = "ACTIVE"},
-                new { Id = 1000, TeamMemberID=1000, CompanyName = "FES", FromDate = DateTime.Now, ToDate = DateTime.Now, City="Hyderabad", Country = "India", Status = "ACTIVE"},
+                    new { Id = 1000, TeamMemberID=1000, CompanyName = "Cognizant",  FromDate = DateTime.Now.AddMonths(-32),ToDate = DateTime.Now.AddMonths(-12), City = "Hyderabad", Country = "India", Status = "ACTIVE"},
+                    new { Id = 1001, TeamMemberID=1000, CompanyName = "Infosys",  FromDate = DateTime.Now.AddMonths(-64),ToDate = DateTime.Now.AddMonths(-32), City="Hyderabad", Country = "India", Status = "ACTIVE"},
+                    new { Id = 1002, TeamMemberID=1000, CompanyName = "eGain",  FromDate = DateTime.Now.AddMonths(-68),ToDate = DateTime.Now.AddMonths(-64), City="Hyderabad", Country = "India", Status = "ACTIVE"},
+                    new { Id = 1003, TeamMemberID=1000, CompanyName = "FES",  FromDate = DateTime.Now.AddMonths(-90),ToDate = DateTime.Now.AddMonths(-68), City="Hyderabad", Country = "India", Status = "ACTIVE"},
                 }).ToList();
-      return nodes.FindAll(node => node.Id == id);
+      return nodes.Find(node => node.Id == id);
     }
+
 
     // POST api/Person
     [HttpPost]

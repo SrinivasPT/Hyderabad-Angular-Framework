@@ -7,27 +7,11 @@ import { LoginComponent } from './login';
 // import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
 
 const appRoutes: Routes = [
-  // {
-  //   path: 'admin',
-  //   loadChildren: './admin/admin.module#AdminModule',
-  //   canLoad: [AuthGuard]
-  // },
-  {
-    path: 'person',
-    loadChildren: './person/person.module#PersonModule',
-    data: { preload: true }
-  },
-  // {
-  //   path: '',
-  //   loadChildren: './team-member/team-member.module#TeamMemberModule',
-  //   data: { preload: false }
-  // },
   {
     path: 'team-member',
     loadChildren: './team-member/team-member.module#TeamMemberModule',
     data: { preload: false }
   },
-  // { path: '', redirectTo: '/person', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent }
 ];

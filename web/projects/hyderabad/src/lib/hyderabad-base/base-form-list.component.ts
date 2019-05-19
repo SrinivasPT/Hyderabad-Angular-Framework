@@ -24,6 +24,10 @@ export class BaseFormListComponent<T> extends BaseComponent<T> implements OnInit
     this.fb = this.injector.get(FormBuilder);
   }
 
+  protected setEntityInstance(data: any = {}): T {
+    return {} as T;
+  }
+
   ngOnInit() {
     this.searchCriteria = this.setEntityInstance();
     this.activatedRoute.data.subscribe((data: { data: T[] }) => {

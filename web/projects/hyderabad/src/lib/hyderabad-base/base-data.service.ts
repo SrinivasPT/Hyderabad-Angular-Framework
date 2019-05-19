@@ -16,9 +16,13 @@ export abstract class BaseDataService<T> implements Resolve<T> {
     this.databaseService = this.injector.get(DatabaseService);
   }
 
-  // Note: Observe the return type. It can either return single value or a collection based on the type of call.
   get(id: string | number): Observable<T | T[]> {
-    return this.cacheService.get(this.getCacheKey(id), this.databaseService.get(this.controllerName(), id));
+    return this.cacheService.get(this.getCacheKey(id, 'GET'), this.databaseService.get(this.controllerName(), id));
+  }
+
+  // Note: Observe the return type. It can either return single value or a collection based on the type of call.
+  getByParentID(id: string | number): Observable<T | T[]> {
+    return this.cacheService.get(this.getCacheKey(id, 'GetByParentID'), this.databaseService.getByParentID(this.controllerName(), id));
   }
 
   save(data: T): Observable<T> {
@@ -49,7 +53,7 @@ export abstract class BaseDataService<T> implements Resolve<T> {
     const id = state.url.split('/').reverse()[1];
 
     if (id) {
-      return this.get(id).pipe(
+      return this.getByParentID(id).pipe(
         take(1),
         mergeMap(data => {
           return data ? of(data) : EMPTY;
@@ -74,4 +78,13 @@ export abstract class BaseDataService<T> implements Resolve<T> {
   parse(entity: T): T {
     return entity;
   }
+  // parse(data: any): any {
+  //   function reviver(key, value) {
+  //     if (typeof value === 'string' && (key as String).indexOf('Date') > 0) {
+  //       return new Date(value);
+  //     }
+  //     return value;
+  //   }
+  //   return JSON.parse(JSON.stringify(data), reviver);
+  // }
 }

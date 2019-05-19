@@ -13,8 +13,8 @@ namespace service.Controllers
   public class TeamMemberDetailController : ControllerBase
   {
 
-    [HttpGet("{id}")]
-    public dynamic Get(int id)
+    [HttpGet("GetByParentId/{id}")]
+    public dynamic GetByParentId(int id)
     {
       var nodes = (new[] {
                 new { Id = 1000, TeamMemberId = 100, FirstName = "Srinivas", LastName = "Peeta", Country = "India", JoinDate=DateTime.Now, Comments="Test Comments", Status = "ACTIVE"},

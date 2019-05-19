@@ -1,3 +1,4 @@
+import { TemplateRef } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { clone } from 'ramda';
 
@@ -28,14 +29,15 @@ export class GridSetting {
   public pageSize: number;
   public newEntityNodeName: string;
   public showEditForm: false;
+  public content: string | TemplateRef<any> | Function;
 
-  constructor(public data: any[] = [], newEntityName: string = '') {
-    this.gridView = { data, total: data.length };
+  constructor(public data: any[] = [], detailDialogComponent: string | TemplateRef<any> | Function = '') {
     this.gridData = clone(data);
     this.skip = 0;
     this.pageSize = 3;
-    this.newEntityNodeName = newEntityName;
+    this.gridView = { data: data.slice(this.skip, this.skip + this.pageSize), total: data.length };
     this.showEditForm = false;
+    this.content = detailDialogComponent;
   }
 
   reset() {

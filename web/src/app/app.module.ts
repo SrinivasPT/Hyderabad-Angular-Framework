@@ -16,7 +16,7 @@ export let AppInjector: Injector;
     HyderabadModule.forRoot(environment),
     LoggerModule.forRoot({
       serverLoggingUrl: 'https://localhost:5001/api/log',
-      level: NgxLoggerLevel.DEBUG,
+      level: NgxLoggerLevel.TRACE,
       serverLogLevel: NgxLoggerLevel.ERROR
     })
   ],
