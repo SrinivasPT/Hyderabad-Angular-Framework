@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NGXLogger } from 'hyderabad-logger';
 import { UserIdleService } from '../../hyderabad-security/services/idle.service';
 import { Auth } from '../../iris-schema';
 import { DatabaseService } from './database.service';
@@ -7,7 +8,7 @@ import { DatabaseService } from './database.service';
 export class SessionService {
   isLoggedIn = false;
   auth: Auth = new Auth();
-  constructor(public idleService: UserIdleService, public databaseService: DatabaseService<any>) {}
+  constructor(public idleService: UserIdleService, public databaseService: DatabaseService<any>, protected logger: NGXLogger) {}
 
   /**
    * Notes: This function is returning the promise. APP_INITIALIZER in AppModule will wait till this function is resolved
@@ -30,11 +31,12 @@ export class SessionService {
   }
 
   startSession() {
+    this.logger.info('User Logged in successfully & starting a new session');
     this.idleService.startWatching();
   }
 
   failedAuthentication() {
-    console.log('Login failed!!!');
+    this.logger.info('User Failed authentication');
   }
 
   startWatching() {}

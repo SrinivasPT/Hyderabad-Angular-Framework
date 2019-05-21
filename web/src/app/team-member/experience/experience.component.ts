@@ -10,6 +10,7 @@ import { ExperienceDetailComponent } from '../experience-detail/experience-detai
 })
 export class ExperienceComponent extends BaseFormDetailComponent<TeamMemberExperience | TeamMemberExperienceDetail> implements OnInit {
   gridSettings: GridSetting = new GridSetting();
+  gridSettings_1: GridSetting = new GridSetting();
   constructor(protected injector: Injector, protected teamMemberExperienceService: TeamMemberExperienceService) {
     super(injector, teamMemberExperienceService);
   }
@@ -19,6 +20,13 @@ export class ExperienceComponent extends BaseFormDetailComponent<TeamMemberExper
   }
 
   additionalFormInitialize() {
+    const testData = [
+      { id: 12345, firstName: 'Srinivas', lastName: 'Peeta', age: 44, city: 'Hyderabad' },
+      { id: 23456, firstName: 'Sreelatha', lastName: 'Peeta', age: 44, city: 'Pune' },
+      { id: 12346, firstName: 'Srinivas_1', lastName: 'Peeta', age: 44, city: 'Hyderabad' },
+      { id: 23457, firstName: 'Sreelatha_1', lastName: 'Peeta', age: 44, city: 'Pune' }
+    ];
     this.gridSettings = new GridSetting(Object.values(this.entity['experience']), ExperienceDetailComponent);
+    this.gridSettings_1 = new GridSetting(testData, ExperienceDetailComponent);
   }
 }

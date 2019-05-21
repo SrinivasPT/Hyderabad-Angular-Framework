@@ -5,23 +5,19 @@ import { HyderabadMessagesModule } from 'hyderabad-messages';
 import { PrettyPrintPipe } from './hyderabad-debug-controls/pipes/pretty-print.pipe';
 import { HyderabadGridModule } from './hyderabad-grid/hyderabad-grid.module';
 import { HyderabdInputControlsModule } from './hyderabad-input-controls/hyderabad-input-controls.module';
-import { FooterBarComponent } from './hyderabad-page-controls/components/footer-bar/footer-bar.component';
-import { HeaderBarComponent } from './hyderabad-page-controls/components/header-bar/header-bar.component';
-import { PageNotFoundComponent } from './hyderabad-page-controls/components/page-not-found/page-not-found.component';
+import { HyderabadPageControlsModule } from './hyderabad-page-controls/hyderabad-page-controls.module';
 import { KendoControlsModule } from './kendo-controls/kendo-controls.module';
 
 @NgModule({
-  declarations: [HeaderBarComponent, FooterBarComponent, PageNotFoundComponent, PrettyPrintPipe],
-  imports: [CommonModule, KendoControlsModule, HyderabadBaseModule, HyderabadMessagesModule],
+  declarations: [PrettyPrintPipe],
+  imports: [CommonModule, KendoControlsModule, HyderabadBaseModule, HyderabadMessagesModule, HyderabadPageControlsModule],
   exports: [
     KendoControlsModule,
     HyderabadBaseModule,
     HyderabadMessagesModule,
     HyderabdInputControlsModule,
+    HyderabadPageControlsModule,
     HyderabadGridModule,
-    HeaderBarComponent,
-    FooterBarComponent,
-    PageNotFoundComponent,
     PrettyPrintPipe
   ]
 })
