@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NGXLogger } from 'hyderabad-logger';
-import { assoc, concat, map, split, toLower, toUpper } from 'ramda';
+import { concat, map, split, toLower, toUpper } from 'ramda';
 
 export class ButtonPallet {
   code: string;
@@ -45,14 +45,4 @@ export class ButtonPalletComponent implements OnInit {
       (curVal, index, array) => (array[index] = { code: curVal, value: capitalCaseForWords(curVal), permVal: Math.pow(2, index) })
     );
   }
-
-  //#region Deleted Code
-  generateButtonConfig_V2(buttonCodes: string[]): any[] {
-    const capitalCaseForWord = val => concat(toUpper(val.charAt(0)), toLower(val.slice(1)));
-    const capitalCaseForWords = val => map(capitalCaseForWord, split('_', val)).join(' ');
-    const buttonConfig = val => assoc('code', val, assoc('value', capitalCaseForWords(val), {}));
-    const buttonsConfig = map(buttonConfig, buttonCodes);
-    return buttonsConfig.map((curVal, index, array) => (array[index] = assoc('permVal', Math.pow(2, index), curVal)));
-  }
-  //#endregion
 }
