@@ -2,8 +2,8 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DialogService } from '@progress/kendo-angular-dialog';
+import { CustomDialogService } from 'hyderabad-common';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { SessionService } from '../hyderabad-common/services/session.service';
 import { FormFieldValidationService } from '../hyderabad-security/services/form-field-validation.service';
 import { getComponentNameFromConstructor } from '../hyderabad-utility/common';
@@ -21,6 +21,7 @@ export class BaseFormDetailComponent<T extends IEntity> extends BaseComponent<T>
   protected originalEntity = {} as T; // data before any changes are made
   protected entity: T = {} as T;
   protected sessionService: SessionService;
+  protected customDialogService: CustomDialogService;
   protected activatedRoute: ActivatedRoute;
   protected formFieldValidationService: FormFieldValidationService;
   protected dialogService: DialogService;
@@ -31,7 +32,7 @@ export class BaseFormDetailComponent<T extends IEntity> extends BaseComponent<T>
     this.sessionService = this.injector.get(SessionService);
     this.activatedRoute = this.injector.get(ActivatedRoute);
     this.fb = this.injector.get(FormBuilder);
-    this.dialogService = this.injector.get(DialogService);
+    this.customDialogService = this.injector.get(CustomDialogService);
     this.formFieldValidationService = this.injector.get(FormFieldValidationService);
     this.entity = this.setEntityInstance();
   }
@@ -78,19 +79,18 @@ export class BaseFormDetailComponent<T extends IEntity> extends BaseComponent<T>
     // Note: Here I wasteed couple of hours as I was not returning the observable.
     // Also converting the DialogResult to boolean also took some time.
     // Finally was able to figure out that map should be used to transform the observable.
-    return (
-      this.dialogService
-        .open({
-          title: 'Confirmation?',
-          content: 'Form data changed. Do you want to save the changes?',
-          actions: [{ text: 'Yes', primary: true }, { text: 'No' }],
-          width: 450,
-          height: 200,
-          minWidth: 250
-        })
-        // tslint:disable-next-line: no-string-literal
-        .result.pipe(map(result => (result['primary'] ? false : true)))
-    );
+    return this.customDialogService.showFormDeactivateConfirmation();
+    // this.dialogService
+    //   .open({
+    //     title: 'Confirmation?',
+    //     content: 'Form data changed. Do you want to save the changes?',
+    //     actions: [{ text: 'Yes', primary: true }, { text: 'No' }],
+    //     width: 450,
+    //     height: 200,
+    //     minWidth: 250
+    //   })
+    //   // tslint:disable-next-line: no-string-literal
+    //   .result.pipe(map(result => (result['primary'] ? false : true)))
   }
 
   save() {
