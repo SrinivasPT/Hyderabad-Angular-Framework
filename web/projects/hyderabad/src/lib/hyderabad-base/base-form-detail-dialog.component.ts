@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SessionService } from '../hyderabad-common/services/session.service';
 import { FormFieldValidationService } from '../hyderabad-security/services/form-field-validation.service';
+import { getComponentNameFromConstructor } from '../hyderabad-utility/common';
 import { IEntity } from '../iris-schema';
-import { getComponentNameFromConstructor } from '../utility/common';
 import { BaseDataService } from './base-data.service';
 
 @Component({ template: '' })

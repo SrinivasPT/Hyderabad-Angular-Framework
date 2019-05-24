@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NGXLogger } from 'hyderabad-logger';
-import { UserIdleService } from '../../hyderabad-security/services/idle.service';
 import { Auth } from '../../iris-schema';
 import { DatabaseService } from './database.service';
+import { UserIdleService } from './idle.service';
 
 @Injectable()
 export class SessionService {
@@ -43,5 +43,9 @@ export class SessionService {
 
   getAuthorizationToken() {
     return `Bearer ${this.auth.bearerToken}`;
+  }
+
+  endSession(): void {
+    this.auth.bearerToken = undefined;
   }
 }

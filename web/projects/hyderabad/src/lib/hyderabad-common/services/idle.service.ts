@@ -33,9 +33,10 @@ export class UserIdleService {
   protected activityEvents$: Observable<any>;
 
   protected timerStart$ = new Subject<boolean>();
-  protected timeout$ = new Subject<boolean>();
   protected idle$: Observable<any>;
   protected timer$: Observable<any>;
+
+  public timeout$ = new Subject<boolean>();
   /**
    * Idle value in seconds.
    * Default equals to 10 minutes.

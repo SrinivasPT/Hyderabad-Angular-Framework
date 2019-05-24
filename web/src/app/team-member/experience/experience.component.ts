@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BaseFormDetailComponent, GridSetting } from 'hyderabad';
+import { GridEditAction } from 'projects/hyderabad/src/lib/iris-enum';
 import { TeamMemberExperienceService } from 'src/app/business-services';
 import { TeamMemberExperience, TeamMemberExperienceDetail } from 'src/app/pmo-schema';
 import { ExperienceDetailComponent } from '../experience-detail/experience-detail.component';
@@ -26,7 +27,7 @@ export class ExperienceComponent extends BaseFormDetailComponent<TeamMemberExper
       { id: 12346, firstName: 'Srinivas_1', lastName: 'Peeta', age: 44, city: 'Hyderabad' },
       { id: 23457, firstName: 'Sreelatha_1', lastName: 'Peeta', age: 44, city: 'Pune' }
     ];
-    this.gridSettings = new GridSetting(Object.values(this.entity['experience']), ExperienceDetailComponent);
-    this.gridSettings_1 = new GridSetting(testData, ExperienceDetailComponent);
+    this.gridSettings = new GridSetting(Object.values(this.entity['experience']), ExperienceDetailComponent, GridEditAction.OPEN_POPUP);
+    this.gridSettings_1 = new GridSetting(testData, ExperienceDetailComponent, GridEditAction.OPEN_POPUP);
   }
 }

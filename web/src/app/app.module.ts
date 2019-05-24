@@ -1,15 +1,16 @@
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CanDeactivateGuard, httpInterceptorProviders, HyderabadModule, LoggerModule, NgxLoggerLevel, SessionService } from 'hyderabad';
+import { HyderabadModule } from 'hyderabad';
+import { httpInterceptorProviders, SessionService } from 'hyderabad-common';
+import { LoggerModule, NgxLoggerLevel } from 'hyderabad-logger';
+import { CanDeactivateGuard } from 'hyderabad-security';
+// import { CanDeactivateGuard, httpInterceptorProviders, HyderabadModule, LoggerModule, NgxLoggerLevel, SessionService } from 'hyderabad';
 import { environment } from 'src/environments/environment.prod';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login';
-
-export let AppInjector: Injector;
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -34,8 +35,4 @@ export let AppInjector: Injector;
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(private injector: Injector) {
-    AppInjector = this.injector;
-  }
-}
+export class AppModule {}

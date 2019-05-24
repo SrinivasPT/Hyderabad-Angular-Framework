@@ -1,5 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { BaseDataService } from 'hyderabad';
+import { isNilOrEmpty } from 'projects/hyderabad/src/lib/hyderabad-utility';
 import { has, identity } from 'ramda';
 import { TeamMemberExperience, TeamMemberExperienceDetail } from '../pmo-schema';
 
@@ -10,6 +11,9 @@ export class TeamMemberExperienceService extends BaseDataService<TeamMemberExper
   }
 
   parse(data: TeamMemberExperience | TeamMemberExperienceDetail): TeamMemberExperience | TeamMemberExperienceDetail {
+    if (isNilOrEmpty(data)) {
+      return data;
+    }
     // tslint:disable-next-line: no-string-literal
     has('fromDate', data) ? (data['fromDate'] = new Date(data['fromDate'])) : identity(0);
     // tslint:disable-next-line: no-string-literal

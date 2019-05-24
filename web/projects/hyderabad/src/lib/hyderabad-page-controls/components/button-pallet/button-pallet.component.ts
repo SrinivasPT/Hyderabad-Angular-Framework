@@ -12,7 +12,7 @@ export class ButtonPallet {
   template: `
     <div class="k-block">
       <ng-container *ngFor="let config of buttonConfig">
-        <button kendoButton *ngIf="true" (click)="onUserAction(config.code)">{{ config.value }}</button>
+        <button kendoButton (click)="onUserAction(config.code)">{{ config.value }}</button>
       </ng-container>
     </div>
   `
@@ -27,15 +27,36 @@ export class ButtonPalletComponent implements OnInit {
     // this.buttonConfig = this.generateButtonConfig(this.buttonCodes);
     this.enableButtons();
     this.logger.log('ButtonPalletComponent::ngOnInit', 'Button Config', this.buttonConfig);
-    this.enableButtons(['ADD_NEW', 'SAVE']);
   }
 
   onUserAction(action: string) {
+    this.enableButtonsBasedOnUserAction(action);
     console.log(action);
   }
 
   enableButtons(buttons: string[] = this.buttonCodes) {
     this.buttonConfig = this.generateButtonConfig(buttons);
+  }
+
+  enableButtonsBasedOnUserAction(action: string) {
+    let buttonsToEnable = [];
+    switch (action) {
+      case 'ADD_NEW':
+        buttonsToEnable = ['SAVE', 'CANCEL'];
+        break;
+      case 'EDIT':
+        buttonsToEnable = ['SAVE', 'CANCEL'];
+        break;
+      case 'SAVE':
+        buttonsToEnable = ['ADD_NEW', 'EDIT', 'SAVE', 'BACK_TO_LIST', 'CANCEL'];
+        break;
+      case 'CANCEL':
+        buttonsToEnable = ['ADD_NEW', 'EDIT', 'SAVE', 'BACK_TO_LIST', 'CANCEL'];
+        break;
+      default:
+        this.logger.warn('enableButtonsBasedOnUserAction', 'Incorrect User Action Came in');
+    }
+    this.enableButtons(buttonsToEnable);
   }
 
   generateButtonConfig(buttonCodes: any[]): any[] {

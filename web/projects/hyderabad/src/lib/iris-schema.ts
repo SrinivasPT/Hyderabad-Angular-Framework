@@ -1,6 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { clone } from 'ramda';
+import { GridEditAction } from './iris-enum';
 
 export class IEntity {
   id: number;
@@ -30,14 +31,20 @@ export class GridSetting {
   public newEntityNodeName: string;
   public showEditForm: false;
   public content: string | TemplateRef<any> | Function;
+  public editAction: number;
 
-  constructor(public data: any[] = [], detailDialogComponent: string | TemplateRef<any> | Function = '') {
+  constructor(
+    public data: any[] = [],
+    detailDialogComponent: string | TemplateRef<any> | Function = '',
+    editAction: number = GridEditAction.REDIRECT_AT_CHILD_LEVEL
+  ) {
     this.gridData = clone(data);
     this.skip = 0;
     this.pageSize = 3;
     this.gridView = { data: data.slice(this.skip, this.skip + this.pageSize), total: data.length };
     this.showEditForm = false;
     this.content = detailDialogComponent;
+    this.editAction = editAction;
   }
 
   reset() {

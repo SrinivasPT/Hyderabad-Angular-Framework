@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '@progress/kendo-angular-dialog';
 import { ColumnComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { NGXLogger } from 'hyderabad-logger';
 import * as R from 'ramda';
+import { GridEditAction } from '../../iris-enum';
 import { GridSetting } from '../../iris-schema';
 
 @Component({
@@ -13,7 +15,12 @@ export class GridComponent implements AfterViewInit {
   @Input() public gridSettings: GridSetting;
   @ViewChild('grid') public gridRef;
 
-  constructor(private dialogService: DialogService, protected logger: NGXLogger) {}
+  constructor(
+    private dialogService: DialogService,
+    private activetedRoute: ActivatedRoute,
+    private router: Router,
+    protected logger: NGXLogger
+  ) {}
 
   ngAfterViewInit() {
     this.gridRef.columns.reset(this.getColumns());
@@ -54,12 +61,19 @@ export class GridComponent implements AfterViewInit {
   getLabel = (label: string) => (label.charAt(0).toUpperCase() + label.slice(1)).split(/(?=[A-Z])/).join(' ');
 
   onRowEdit(data) {
+    if (this.gridSettings.editAction === GridEditAction.OPEN_POPUP) {
+      this.openEditDialog(data);
+    } else if (this.gridSettings.editAction === GridEditAction.REDIRECT_AT_CHILD_LEVEL) {
+      this.router.navigate(['./', { id: data.id }], { relativeTo: this.activetedRoute });
+    }
+  }
+
+  private openEditDialog(data: any) {
     const dialogRef = this.dialogService.open({
       title: 'Confirmation?',
       content: this.gridSettings.content,
       actions: [{ text: 'Yes', primary: true }, { text: 'No' }]
     });
-
     const dialogComponentInstance = dialogRef.content.instance;
     dialogComponentInstance.formData = data;
     this.logger.debug('Data passed from Grid to the component', data);

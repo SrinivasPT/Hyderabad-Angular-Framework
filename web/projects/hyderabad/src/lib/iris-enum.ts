@@ -1,0 +1,5 @@
+export enum GridEditAction {
+  REDIRECT_AT_PRENT_LEVEL = 1,
+  REDIRECT_AT_CHILD_LEVEL,
+  OPEN_POPUP
+}

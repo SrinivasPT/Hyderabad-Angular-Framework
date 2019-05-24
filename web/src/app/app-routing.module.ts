@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from 'hyderabad';
-import { LoginComponent } from './login';
+import { LogoutComponent, PageNotFoundComponent } from 'hyderabad';
 
 // import { AuthGuard } from './auth/auth.guard';
 // import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
@@ -12,7 +11,7 @@ const appRoutes: Routes = [
     loadChildren: './team-member/team-member.module#TeamMemberModule',
     data: { preload: false }
   },
-  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
