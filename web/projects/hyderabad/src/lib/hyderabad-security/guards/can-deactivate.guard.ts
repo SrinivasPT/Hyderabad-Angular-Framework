@@ -15,15 +15,10 @@ export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate>
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot
   ): Observable<boolean> | boolean | Promise<boolean> {
+    // Note: While logout, prevent the canDeactivate from firing
     if (nextState.url === '/logout') {
-      return true; // bypass checks if we are trying to go to /login
+      return true; // bypass checks if we are trying to go to /logout
     }
     return component.canDeactivate ? component.canDeactivate() : true;
   }
 }
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/
