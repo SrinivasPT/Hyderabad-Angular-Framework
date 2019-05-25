@@ -24,6 +24,7 @@ export class TextComponent implements OnInit {
   constructor(public ccService: CustomControlsService) {}
 
   ngOnInit() {
+    console.log(JSON.stringify(this.group.value));
     this.label = this.label === undefined ? this.ccService.getLabel(this.frmControlName, this.label) : this.label;
   }
 }

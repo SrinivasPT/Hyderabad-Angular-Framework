@@ -69,3 +69,20 @@ export class FieldValidationRule {
 export class FormFieldValidationErrorMessage {
   constructor(public sectionName: string = null, public fieldName: string = null, public ErrorMessage: string = null) {}
 }
+
+export enum PageType {
+  LIST = 1,
+  DETAIL,
+  DETAIL_POPUP
+}
+
+export class PageContext {
+  componentName: string = null; // Current Component Name
+  pageType: number = null; // Page type - Listing / Detail / Detail Opened in dialog
+  id: number | string = null; // id of the record
+  searchCriteria: any = null; // Search criteria in case the page is of type list page
+  formData: any; // form data
+  originalFormData: any; // data retrieved from the database
+  url: string = null; // current URL of the current page
+  userAction: any[] = []; // List of all the user actions on the current page
+}

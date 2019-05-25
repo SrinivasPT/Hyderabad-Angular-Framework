@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { ElementRef, Injectable, Injector } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import * as R from 'ramda';
 import { BaseDataService } from '../../hyderabad-base/base-data.service';
@@ -13,6 +13,16 @@ export class FormFieldValidationService extends BaseDataService<FieldValidationR
   setupForm(componentName: string, form: FormGroup) {
     this.get(componentName).subscribe((validations: FieldValidationRule[]) => {
       validations.forEach(validation => this.setFormField(validation, form));
+    });
+  }
+
+  removeHiddenFields(componentName: string, elementRef: ElementRef, form: FormGroup) {
+    // TODO: This will give problem in nested cases?
+    elementRef.nativeElement.querySelectorAll('[formControlName').forEach(element => {
+      console.log(`Element: ${element.getAttribute('formControlName')}`);
+      if (form.controls[element.getAttribute('formControlName')] === undefined) {
+        element.parentElement.style.visibility = 'hidden';
+      }
     });
   }
 
