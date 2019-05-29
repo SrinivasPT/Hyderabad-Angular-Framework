@@ -28,19 +28,18 @@ export class GridSetting {
   public gridData: any[];
   public skip: number;
   public pageSize: number;
-  public newEntityNodeName: string;
   public showEditForm: false;
   public content: string | TemplateRef<any> | Function;
   public editAction: number;
 
   constructor(
-    public data: any[] = [],
+    data: any[] = [],
     detailDialogComponent: string | TemplateRef<any> | Function = '',
     editAction: number = GridEditAction.REDIRECT_AT_CHILD_LEVEL
   ) {
-    this.gridData = clone(data);
     this.skip = 0;
     this.pageSize = 3;
+    this.gridData = clone(data);
     this.gridView = { data: data.slice(this.skip, this.skip + this.pageSize), total: data.length };
     this.showEditForm = false;
     this.content = detailDialogComponent;

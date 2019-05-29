@@ -33,7 +33,7 @@ export class CustomDialogService {
           minWidth: 250
         })
         // tslint:disable-next-line: no-string-literal
-        .result.pipe(map(result => (result['primary'] ? true : false)))
+        .result.pipe(map(result => (!result['primary'] ? true : false)))
     );
   }
 

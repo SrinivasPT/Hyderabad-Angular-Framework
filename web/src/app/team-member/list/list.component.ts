@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { GridSetting } from 'hyderabad';
 import { BaseFormListComponent } from 'projects/hyderabad/src/lib/hyderabad-base/base-form-list.component';
 import { TeamMemberService } from 'src/app/business-services/team-member.service';
 import { TeamMemberList } from 'src/app/pmo-schema';
@@ -15,6 +16,10 @@ export class ListComponent extends BaseFormListComponent<TeamMemberList> impleme
   ngOnInit() {
     super.ngOnInit();
     this.tabValues = ['ACTIVE', 'INACTIVE', 'ALL'];
+  }
+
+  initializeGrids() {
+    this.gridSettings.set('list', new GridSetting());
   }
 
   setEntityInstance() {

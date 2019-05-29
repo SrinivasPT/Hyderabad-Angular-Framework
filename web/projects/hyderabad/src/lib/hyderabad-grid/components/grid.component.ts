@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '@progress/kendo-angular-dialog';
 import { ColumnComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { NGXLogger } from 'hyderabad-logger';
-import * as R from 'ramda';
+import { clone, concat, difference, isEmpty, keys, pluck } from 'ramda';
 import { GridEditAction } from '../../iris-enum';
 import { GridSetting } from '../../iris-schema';
 
@@ -14,6 +14,7 @@ import { GridSetting } from '../../iris-schema';
 export class GridComponent implements AfterViewInit {
   @Input() public gridSettings: GridSetting;
   @ViewChild('grid') public gridRef;
+  @ContentChildren(ColumnComponent) public gridColumns;
 
   constructor(
     private dialogService: DialogService,
@@ -28,19 +29,19 @@ export class GridComponent implements AfterViewInit {
 
   getColumns() {
     // designerColumns are the custom columns defined by the developer while using the grid
-    const designerColumns: any[] = this.gridRef.columns.toArray();
-    const designerColumnFieldNames: any[] = R.pluck('field', designerColumns);
+    const designerColumns: any[] = this.gridColumns.toArray();
+    const designerColumnFieldNames: any[] = pluck('field', designerColumns);
     const dynamicColumns = this.getDynamicColumnsExcludingDesignerColumns(designerColumnFieldNames);
-    return R.concat(designerColumns, dynamicColumns);
+    return concat(designerColumns, dynamicColumns);
   }
 
   getDynamicColumnsExcludingDesignerColumns(excludeColumnList: any[] = []) {
     const dynamicColumns: any[] = [];
-    if (R.isEmpty(this.gridSettings.gridView.data[0])) {
+    if (isEmpty(this.gridSettings.gridView.data[0])) {
       return [];
     }
 
-    R.difference(R.keys(this.gridSettings.gridView.data[0]), excludeColumnList).forEach(field => {
+    difference(keys(this.gridSettings.gridView.data[0]), excludeColumnList).forEach(field => {
       const columnComponent: ColumnComponent = new ColumnComponent();
       columnComponent.field = field.toString();
       columnComponent.title = this.getLabel(field.toString());
@@ -53,7 +54,7 @@ export class GridComponent implements AfterViewInit {
   pageChange(event: PageChangeEvent) {
     this.gridSettings.skip = event.skip;
     this.gridSettings.gridView = {
-      data: R.clone(this.gridSettings.gridData).slice(this.gridSettings.skip, this.gridSettings.skip + this.gridSettings.pageSize),
+      data: clone(this.gridSettings.gridData).slice(this.gridSettings.skip, this.gridSettings.skip + this.gridSettings.pageSize),
       total: this.gridSettings.gridView.total
     };
   }

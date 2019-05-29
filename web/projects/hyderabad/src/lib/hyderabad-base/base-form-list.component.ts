@@ -6,19 +6,17 @@ import { SessionService } from 'hyderabad-common';
 import * as R from 'ramda';
 import { GridSetting } from '../iris-schema';
 import { BaseDataService } from './base-data.service';
-import { BaseComponent } from './base.component';
 
 @Component({ template: '' })
-export class BaseFormListComponent<T> extends BaseComponent<T> implements OnInit {
+export abstract class BaseFormListComponent<T> implements OnInit {
   protected tabValues = [];
   protected searchCriteria: any = {};
   protected sessionService: SessionService;
   protected activatedRoute: ActivatedRoute;
   protected fb: FormBuilder;
-  protected gridSettings: GridSetting = new GridSetting();
+  protected gridSettings: Map<string, GridSetting> = new Map();
 
   constructor(protected injector: Injector, protected baseService: BaseDataService<T>) {
-    super();
     this.sessionService = this.injector.get(SessionService);
     this.activatedRoute = this.injector.get(ActivatedRoute);
     this.fb = this.injector.get(FormBuilder);
@@ -30,22 +28,29 @@ export class BaseFormListComponent<T> extends BaseComponent<T> implements OnInit
 
   ngOnInit() {
     this.searchCriteria = this.setEntityInstance();
+    this.initializeGrids();
     this.activatedRoute.data.subscribe((data: { data: T[] }) => {
-      this.reloadGrid(data.data);
+      this.loadGrids(data.data);
     });
   }
 
-  reloadGrid(data: any[]) {
-    this.gridSettings.skip = 0;
-    this.gridSettings.gridView = {
-      data: R.clone(data).slice(this.gridSettings.skip, this.gridSettings.skip + this.gridSettings.pageSize),
+  abstract initializeGrids();
+
+  loadGrids(data: any[]) {
+    this.gridSettings.forEach(gridSetting => this.loadIndividualGrid(gridSetting, data));
+  }
+
+  loadIndividualGrid(gridSetting: GridSetting, data: any[]): void {
+    gridSetting.skip = 0;
+    gridSetting.gridView = {
+      data: R.clone(data).slice(gridSetting.skip, gridSetting.skip + gridSetting.pageSize),
       total: data.length
     };
-    this.gridSettings.gridData = data;
+    gridSetting.gridData = data;
   }
 
   onTabSelect(event: SelectEvent) {
     this.searchCriteria.selectedTab = this.tabValues[event.index];
-    this.baseService.search(this.searchCriteria).subscribe(data => this.reloadGrid(data));
+    this.baseService.search(this.searchCriteria).subscribe(data => this.loadGrids(data));
   }
 }

@@ -4,7 +4,6 @@
 
 export * from './lib/hyderabad-base/base-data.service';
 export * from './lib/hyderabad-base/base-form-detail.component';
-export * from './lib/hyderabad-base/base.component';
 export * from './lib/hyderabad-base/base.home.component';
 export * from './lib/hyderabad-common/http-interceptors/index';
 export * from './lib/hyderabad-common/services/cache.service';

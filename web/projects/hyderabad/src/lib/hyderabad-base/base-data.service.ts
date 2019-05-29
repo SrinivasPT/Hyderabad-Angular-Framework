@@ -1,5 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { isNil } from 'ramda';
 import { EMPTY, of } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { mergeMap, take } from 'rxjs/operators';
@@ -41,16 +42,9 @@ export abstract class BaseDataService<T> implements Resolve<T> {
     return true;
   }
 
-  // getValidationRules(formName: string) {
-  //   return this.cacheService.get(
-  //     this.getCacheKey(formName, 'ValidationRules'),
-  //     this.databaseService.getValidationRules(this.controllerName(), formName)
-  //   );
-  // }
-
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Observable<never> {
-    // const id = route.paramMap.get('id');
-    const id = state.url.split('/').reverse()[1];
+    let id: string | number = route.paramMap.get('id');
+    id = isNil(id) ? state.url.split('/').reverse()[1] : id;
 
     if (id) {
       return this.getByParentID(id).pipe(

@@ -6,10 +6,10 @@
   <kendo-tabstrip-tab [title]="'All'"> </kendo-tabstrip-tab>
 </kendo-tabstrip>
 
-<hyd-grid [gridSettings]="gridSettings">
-  <kendo-grid-column field="id" title="ID">
+<hyd-grid [gridSettings]="gridSettings.get('list')">
+  <kendo-grid-column field="id" title="Test">
     <ng-template kendoGridCellTemplate let-dataItem>
-      <a [routerLink]="['./', dataItem.id]">{{ dataItem.id }}</a>
+      <a [routerLink]="['/team-member', dataItem.id]">{{ dataItem.id }}</a>
     </ng-template>
   </kendo-grid-column>
 </hyd-grid>

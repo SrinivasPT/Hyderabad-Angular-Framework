@@ -41,17 +41,17 @@ export class UserIdleService {
    * Idle value in seconds.
    * Default equals to 10 minutes.
    */
-  protected idle = 60;
+  protected idle = 600;
   /**
    * Timeout value in seconds.
    * Default equals to 5 minutes.
    */
-  protected timeout = 30;
+  protected timeout = 300;
   /**
    * Ping value in seconds.
    * * Default equals to 2 minutes.
    */
-  protected ping = 12;
+  protected ping = 50;
   /**
    * Timeout status.
    */

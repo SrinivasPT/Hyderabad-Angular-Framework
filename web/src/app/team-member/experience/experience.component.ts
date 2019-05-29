@@ -20,7 +20,7 @@ export class ExperienceComponent extends BaseFormDetailComponent<TeamMemberExper
     super.ngOnInit();
   }
 
-  additionalFormInitialize() {
+  gridInitialize() {
     const testData = [
       { id: 12345, firstName: 'Srinivas', lastName: 'Peeta', age: 44, city: 'Hyderabad' },
       { id: 23456, firstName: 'Sreelatha', lastName: 'Peeta', age: 44, city: 'Pune' },
